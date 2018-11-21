@@ -16,29 +16,42 @@ background(255);
 b1.display();
 b2.display();
 b3.display();
-} // draw()
-class ball { // Define the ball class
+} 
+
+class ball {
 // Attributes
-float x, y; // the x and y location
+float x, y;
 color ballColor; // its color
 float radius; // its radius in pixels
+
 // Constructor
 ball() {
-// The ball has an random location in the sketch window
 x = random(width);
 y = random(height);
-// All balls are red
 ballColor = color(255, 0, 0);
-// All balls are of radius 25 pixels
 radius = 25;
+} 
+ball(float px, float py, float r, color c) {
+// set up Ball with position (x, y)
+x = px;
+y = py;
+// size, r pixels
+radius = r;
+// color, c
+ballColor = c;
 } // ball()
-// Behaviors
+ball(float r, color c) {
+x = random(width);
+y = random(height);
+// radius, r pixels
+radius = r;
+// color, c
+ballColor = c;
+} 
+////\\\\////\\\\
 void display() {
-// display the ball
-// set color attributes
 noStroke();
 fill(ballColor);
-// draw the ball
 ellipse(x, y, 2*radius, 2*radius);
-} // display()
-} // class ball
+} 
+} 
