@@ -1,4 +1,5 @@
 int[] my_map ={0,0,0,0,0,0,0};
+boolean flag;
 int px=70, py=80;
 float dy;
 //classMap[] mods;
@@ -22,17 +23,17 @@ background(0);
   for (Module mod : mods) {
     mod.update();
     mod.display();
-    println(my_map[0]);
+    println(flag);
   }
 }
 void keyPressed() {
-     if (keyCode == LEFT) {
+     if (keyCode == UP) {
         //px=px-5;
-        my_map[0] += 1;
+        if(!flag){flag=true;}
         
-   } else if (keyCode == RIGHT) {
+   } else if (keyCode == DOWN) {
          // px=px+5;
-         my_map[0] -= 1;
+        if(flag){flag=false;}
     } 
  }
 
@@ -44,7 +45,7 @@ int x;
     x = xTemp;
     }
 void update() {
-x++;
+if(flag)x++;
 }    
     
 void display() {
