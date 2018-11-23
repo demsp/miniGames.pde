@@ -1,3 +1,4 @@
+// http://math.sgu.ru/sites/chairs/prinf/materials/java/lesson8.htm
 import javax.swing.*;
 public class MyClass {
 public static void main (String [] args) {
