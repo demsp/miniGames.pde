@@ -1,6 +1,6 @@
 import javax.swing.*;
  
-class Main {
+class JFrameArray {
     public static void main(String[] args) {
        int[] anArray; 
        anArray = new int[10]; 
