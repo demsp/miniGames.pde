@@ -3,7 +3,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
  
-class JFrameArray {
+class JFrameCycle {
     public static void main(String[] args) {
  
         JFrame frame = new JFrame("Окно программы");
