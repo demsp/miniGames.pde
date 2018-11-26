@@ -1,6 +1,9 @@
 import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
  
-class Main {
+class JFrameArray {
     public static void main(String[] args) {
  
         JFrame frame = new JFrame("Окно программы");
