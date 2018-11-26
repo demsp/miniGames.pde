@@ -1,4 +1,4 @@
-public class penClass { 
+public class openClass { 
 public static int a=10; 
 public static int b=15; 
 } 
