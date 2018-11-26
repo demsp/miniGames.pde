@@ -1,4 +1,4 @@
-public class Openclass { 
+public class openClassArray { 
  public static int a=10; 
  public static int b=15; 
  static Integer[] integerArray;
