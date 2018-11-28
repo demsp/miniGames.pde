@@ -28,30 +28,30 @@ _mas[1]+=(random(0,1.1));
 _mas[2]+=(random(0,1.1));
 //comment
 
-text(_mas[0],50,100);
-text(_mas[1],100,100);
-text(_mas[2],150,100);
-text(mods[0].d1,50,200);
-text(mods[1].d2,100,200);
-text(mods[2].d3,150,200);
+ text(_mas[0],50,100);
+ text(_mas[1],100,100);
+ text(_mas[2],150,100);
+ text(mods[0].d1,50,200);
+ text(mods[1].d2,100,200);
+ text(mods[2].d3,150,200);
 
-mods[0].display(0);
-mods[1].display(1);
-mods[2].display(2);
+ mods[0].display(0);
+ mods[1].display(1);
+ mods[2].display(2);
 
-mods[global_i].shake();
-mods[global_i].update();
-println(_mas);
-println("global_i",global_i);
+ mods[global_i].shake();
+ mods[global_i].update();
+ println(_mas);
+ println("global_i",global_i);
 
-if(_mas[0]==0 && _mas[1]==0 &&_mas[2]==0){
-text("You win", 100, 40);
-frameRate(0.1);
-_mas[0]=0;
-_mas[1]=0;
-_mas[2]=0;
-}
-println("_mas[global_i]",_mas[global_i]);
+if(_mas[0]<=1 && _mas[1]<=1 &&_mas[2]<=1){
+ text("You win", 100, 40);
+ frameRate(0.1);
+ _mas[0]=0;
+ _mas[1]=0;
+ _mas[2]=0;
+ }
+ println("_mas[global_i]",_mas[global_i]);
 }
  void keyReleased() { 
     if (keyCode == UP) {
