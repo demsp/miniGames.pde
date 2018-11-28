@@ -1,0 +1,18 @@
+<html>
+<head>
+<title></title>
+<script type="text/javascript">
+var canvas,w,h,ctx;
+function init(){
+canvas=document.getElementById("canvas");
+w=canvas.width;
+h=canvas.height;
+ctx=canvas.getContext('2d');
+ctx.strokeRect(0,0,w,h);
+}
+</script>
+</head>
+<body onload="init()">
+<canvas id="canvas" width=400 height=300></canvas>
+</body>
+</html>
