@@ -1,3 +1,5 @@
+//data/charecter
+
 String text1="";
 int x = 90;
 void setup(){size(300,300);}
