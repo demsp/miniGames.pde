@@ -8,7 +8,7 @@ String command_mem = ">>><>";
 int[] data_mem ={ 10, 10, 10, 10, 10 };
 int rectX=50;
 
-int shoot;
+int reload;
 
 void setup() {   /// setup()
 size(500,300); }
@@ -49,23 +49,23 @@ if (command_mem.charAt(round(dy))=='<') {forward_flag=false; back_flag=true;}
 println("round        ",round(dy));
 println("round_dy     ",round_dy);
 println("forward_flag ",forward_flag);
-println("shoot        ",shoot);
+println("reload       ",reload);
 println("index_data   ",index_data);
 println();
 if (forward_flag && round(dy)!=round_dy){
- shoot=1;
+ reload=1;
  round_dy=round(dy);
  }
  if (back_flag && round(dy)!=round_dy){
- shoot=-1;
+ reload=-1;
  round_dy=round(dy);
  }
-index_data+=shoot;
-println("shoot        ",shoot);
+index_data+=reload;
+println("reload       ",reload);
 println("index_data   ",index_data);
 println();
-if ((forward_flag || back_flag) && round(dy)==round_dy){shoot=0;}
- println("shoot        ",shoot); 
+if ((forward_flag || back_flag) && round(dy)==round_dy){reload=0;}
+ println("reload       ",reload); 
  println("index_data   ",index_data);
  println("*************");
 }
