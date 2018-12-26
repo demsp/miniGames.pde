@@ -1,3 +1,4 @@
+// Sketch: 6-1: Creating and displaying three ball objects
 ball b1, b2, b3;
 void setup() {
 size(400, 400);
