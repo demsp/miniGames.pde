@@ -1,8 +1,8 @@
 // list
 IntList listOfCoordinateX;
 IntList listOfCoordinateY;
-int getX;
-int getY;
+//int getX;
+//int getY;
 //button
 int buttonX=25, buttonY=525;      // Position of square button
 int buttonSize = 50;     // Diameter of square button
@@ -79,7 +79,7 @@ buttonUpdate();
   ellipse(bx+50,by+50,20,20);
   // draw button
   rect(buttonX,buttonY,buttonSize,buttonSize);
-  //println(buttonOver);
+   //println(buttonOver);
  }
 //@@@@@@@@@@@@@@@@@@@@@@@
 //@       Class        @@
@@ -126,10 +126,7 @@ void mousePressed() {
   if(overBox) { 
     locked = true; 
      listOfCoordinateX.append(int(bx));
-      listOfCoordinateY.append(int(by));
-      println(listOfCoordinateX);
-      println(listOfCoordinateY);
-      println();
+      listOfCoordinateY.append(int(by));    
   } else {
     locked = false;
    }
@@ -150,8 +147,18 @@ void mouseReleased() {
   bx=storX;
   by=storY; }
  else if(buttonOver){
-  bx=listOfCoordinateX.get(0);
-  by=listOfCoordinateY.get(0);   }
+   //if list not emty
+   if(listOfCoordinateX.size()!=0){
+  bx=listOfCoordinateX.get(listOfCoordinateX.size()-1);
+  by=listOfCoordinateY.get(listOfCoordinateY.size()-1);
+   /// remove last element of list
+       listOfCoordinateX.remove(listOfCoordinateX.size()-1);
+       listOfCoordinateY.remove(listOfCoordinateY.size()-1);
+       }
+     }
+   println(listOfCoordinateX);
+   println(listOfCoordinateY);
+   println();
 }
 // button
  void buttonUpdate() {
