@@ -1,21 +1,22 @@
+// list
 IntList listOfCoordinateX;
 IntList listOfCoordinateY;
 int getX;
 int getY;
-
-int rectX, rectY;      // Position of square button
-int rectSize = 50;     // Diameter of rect
-boolean rectOver = false;
-//##########
+//button
+int buttonX=25, buttonY=525;      // Position of square button
+int buttonSize = 50;     // Diameter of square button
+boolean buttonOver = false;
+//mouse
 boolean mouseIndikator;
-boolean boo;
+// jump to rect center on release
 float storX;
 float storY;
 
 float bx;
 float by;
-// size of canvas 600*600
-int edgeOfCanvas=500; // Diameter of canvas
+// size of canvas 
+int edgeOfCanvas=500;
 int boxSize = 100;
 boolean overBox = false;
 boolean locked = false;
@@ -29,22 +30,16 @@ int count;
 Module[] mods;
 
 void setup() {
+//size(500, 500);
 size(600, 600);
+ bx = 0;
+  by = 0;
+  rectMode(CORNER);
+//###############
  listOfCoordinateX = new IntList();
  listOfCoordinateY = new IntList();
  listOfCoordinateX.append(0);
  listOfCoordinateY.append(0);
- //inventory.append(15);
- //inventory.append(102);
- 
-rectX = 0;
-  rectY = 550;
- bx = 0;
-  by = 0;
-  rectMode(CORNER);
-  //rectMode(CORNERS);
-   // rectMode(CENTER);
-    //  rectMode(RADIUS);  
 //###############
  stroke(100);
  
@@ -58,13 +53,10 @@ rectX = 0;
       mods[index++] = new Module(x*unit, y*unit);
     }
   }
-  
 }
 void draw() {
   background(0);
-   //update(mouseX, mouseY);
-   update();
-
+buttonUpdate();
   //####################
   for (Module mod : mods) {
     mod.mouseClicke();
@@ -76,34 +68,23 @@ void draw() {
   if (mouseX > bx && mouseX < bx+boxSize && 
       mouseY > by && mouseY < by+boxSize) {
     overBox = true;  
-    if(!locked) { 
-    //  stroke(255); 
-     // fill(153);
-    } 
   } else {
-  //  stroke(153);
-   // fill(153);
-    overBox = false;
-  }
-  
-  // Draw the box
-  fill(255);
+     overBox = false;  
+        }
+ fill(255);
   rect(0,0,100,100);
  
   rect(bx, by, boxSize, boxSize);
   fill(50);
   ellipse(bx+50,by+50,20,20);
- 
- // println(boo);
-   if (rectOver) {
-    fill( color(50));
-  } else {
-    fill(color(255));
-  }
-   rect(rectX, rectY, rectSize, rectSize);
- // int nums = inventory.get(2);
-//  text(nums, 200, 550);
-}
+  // draw button
+  rect(buttonX,buttonY,buttonSize,buttonSize);
+  println(buttonOver);
+ }
+//@@@@@@@@@@@@@@@@@@@@@@@
+//@                    @@
+//@@@@@@@@@@@@@@@@@@@@@@@
+
 class Module {
   int xO;
   int yO;
@@ -115,46 +96,42 @@ class Module {
   }
   // Custom method for drawing the object
   void mouseClicke() {
-/*   if (mouseX >= xO && mouseX <= xO+100 && 
+   /* 
+   if (mouseX >= xO && mouseX <= xO+100 && 
       mouseY >= yO && mouseY <= yO+100) {
    if (overBox && mousePressed && (mouseButton == LEFT)) {
      k=k+1; if(k>255) k=255;
     storX=xO;
     storY=yO;
             } 
-       }     */  
+       }
+     */  
     if (mouseX >= xO && mouseX <= xO+100 && 
       mouseY >= yO && mouseY <= yO+100) {
    if (overBox && mousePressed && (mouseButton == LEFT)) {
     storX=xO;
     storY=yO; 
-    if(mouseIndikator ) {k=255;}//{ k=k+100; if(k>255) k=255; }
+    if(mouseIndikator ) {k=255;} 
             } 
        }
-}
+  }
  void update() {
   fill(k);
   rect(xO, yO, unitSize, unitSize); 
-  
-  }
+   }
 }
-
-//########################  
+//########################
+//########################
 void mousePressed() {
   if(overBox) { 
     locked = true; 
-   // fill(255, 255, 255);
+   
   } else {
     locked = false;
   }
   xOffset = mouseX-bx; 
   yOffset = mouseY-by; 
-
-  if (rectOver) {
-  println("Button");
-  }
 }
-
 void mouseDragged() {
   if(locked) {
     mouseIndikator=false;
@@ -162,31 +139,22 @@ void mouseDragged() {
     by = mouseY-yOffset; 
   }
 }
-
 void mouseReleased() {
   mouseIndikator=true;
   locked = false;
   bx=storX;
   by=storY;
- 
- listOfCoordinateX.append(int(bx));
- listOfCoordinateY.append(int(by));
- println(listOfCoordinateX);
- println(listOfCoordinateY);
- println();
- 
+  if(buttonOver){println("Button");}
 }
-
-//void update(int x, int y) {
-  void update() {
-  if ( overRect(rectX, rectY, rectSize, rectSize) ) {
-    rectOver = true;
+// button
+ void buttonUpdate() {
+  if ( overButton(buttonX, buttonY, buttonSize, buttonSize) ) {
+    buttonOver = true;
   } else {
-   rectOver = false;
+   buttonOver = false;
   }
 }
-
-boolean overRect(int x, int y, int width, int height)  {
+boolean overButton(int x, int y, int width, int height)  {
   if (mouseX >= x && mouseX <= x+width && 
       mouseY >= y && mouseY <= y+height) {
     return true;
@@ -194,4 +162,3 @@ boolean overRect(int x, int y, int width, int height)  {
     return false;
   }
 }
-
