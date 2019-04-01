@@ -1,5 +1,5 @@
 boolean mouseIndikator;
-boolean boo;
+
 float storX;
 float storY;
 
@@ -25,9 +25,6 @@ size(600, 600);
  bx = 0;
   by = 0;
   rectMode(CORNER);
-  //rectMode(CORNERS);
-   // rectMode(CENTER);
-    //  rectMode(RADIUS);  
 //###############
  stroke(100);
  
@@ -41,7 +38,6 @@ size(600, 600);
       mods[index++] = new Module(x*unit, y*unit);
     }
   }
-  
 }
 void draw() {
   background(0);
@@ -57,29 +53,20 @@ void draw() {
   if (mouseX > bx && mouseX < bx+boxSize && 
       mouseY > by && mouseY < by+boxSize) {
     overBox = true;  
-    if(!locked) { 
-    //  stroke(255); 
-     // fill(153);
-    } 
   } else {
-  //  stroke(153);
-   // fill(153);
-    overBox = false;
-  }
-  
-  // Draw the box
- 
-  fill(255);
+     overBox = false;  
+        }
+ fill(255);
   rect(0,0,100,100);
- 
  
   rect(bx, by, boxSize, boxSize);
   fill(50);
   ellipse(bx+50,by+50,20,20);
+ }
+//@@@@@@@@@@@@@@@@@@@@@@@
+//                     @@
+//@@@@@@@@@@@@@@@@@@@@@@@
 
- // println(boo);
- 
-}
 class Module {
   int xO;
   int yO;
@@ -104,33 +91,29 @@ class Module {
     if (mouseX >= xO && mouseX <= xO+100 && 
       mouseY >= yO && mouseY <= yO+100) {
    if (overBox && mousePressed && (mouseButton == LEFT)) {
-    // k=k+1; if(k>255) k=255;
     storX=xO;
     storY=yO; 
-    if(mouseIndikator ) {k=255;}//{ k=k+100; if(k>255) k=255; }
+    if(mouseIndikator ) {k=255;} 
             } 
        }
-}
+  }
  void update() {
   fill(k);
   rect(xO, yO, unitSize, unitSize); 
-  
-  }
+   }
 }
-
-//########################  
+//########################
+//########################
 void mousePressed() {
   if(overBox) { 
     locked = true; 
-   // fill(255, 255, 255);
+   
   } else {
     locked = false;
   }
   xOffset = mouseX-bx; 
   yOffset = mouseY-by; 
-
 }
-
 void mouseDragged() {
   if(locked) {
     mouseIndikator=false;
@@ -138,7 +121,6 @@ void mouseDragged() {
     by = mouseY-yOffset; 
   }
 }
-
 void mouseReleased() {
   mouseIndikator=true;
   locked = false;
