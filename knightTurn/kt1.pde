@@ -1,6 +1,6 @@
 float bx;
 float by;
-int boxSize = 110;
+int boxSize = 100;
 boolean overBox = false;
 boolean locked = false;
 float xOffset = 0.0; 
@@ -21,7 +21,7 @@ size(500, 500);
    // rectMode(CENTER);
     //  rectMode(RADIUS);  
 //###############
- stroke(50);
+ stroke(100);
  
  int wideCount = width / unit;
   int highCount = height / unit;
@@ -47,19 +47,13 @@ void draw() {
   if (mouseX > bx-boxSize && mouseX < bx+boxSize && 
       mouseY > by-boxSize && mouseY < by+boxSize) {
     overBox = true;  
-    if(!locked) { 
-      stroke(255); 
-      fill(153);
-    } 
-  } else {
-    stroke(153);
-    fill(153);
-    overBox = false;
-  }
-  
+  } else {    overBox = false;  }
   // Draw the box
   rect(bx, by, boxSize, boxSize);
 }
+//################
+//#     Class    #
+//################
 class Module {
   int xO;
   int yO;
@@ -72,10 +66,11 @@ class Module {
   // Custom method for drawing the object
   void mouseClicke() {
     
-   if (mouseX >= xO && mouseX <= xO+25 && 
-      mouseY >= yO && mouseY <= yO+25) {
+   if (mouseX >= xO && mouseX <= xO+100 && 
+      mouseY >= yO && mouseY <= yO+100) {
    if (mousePressed && (mouseButton == LEFT)) {
-    k=k+10; if(k>255) k=255;  } 
+    //k=k+10; if(k>255) 
+    k=200;  } 
           }
    
 }
