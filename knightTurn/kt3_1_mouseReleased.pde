@@ -4,7 +4,7 @@ IntList listOfCoordinatesY;
 //int getX;
 //int getY;
 //button
-int buttonX=25, buttonY=525;      // Position of square button
+int buttonX=25, buttonY=525; // Position of square button
 int buttonSize = 50;     // Diameter of square button
 boolean boolButton = false;
 //mouse
@@ -77,7 +77,9 @@ buttonUpdate();
   ellipse(bx+50,by+50,20,20);
   // draw button
   rect(buttonX,buttonY,buttonSize,buttonSize);
-   //println(buttonOver);
+  if(boolButton && mousePressed) { fill(200);
+   rect(buttonX,buttonY,buttonSize,buttonSize); }
+ //println(buttonOver);
  }
 //      //      //      //
 //       Class          //
@@ -144,9 +146,9 @@ void mouseReleased() {
        listOfCoordinatesY.remove(listOfCoordinatesY.size()-1);
        }
      }
-   println(listOfCoordinatesX);
-   println(listOfCoordinatesY);
-   println();
+  // println(listOfCoordinatesX);
+  // println(listOfCoordinatesY);
+  // println();
 }
 // button
  void buttonUpdate() {
