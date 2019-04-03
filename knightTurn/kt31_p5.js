@@ -85,8 +85,10 @@ function draw() {
   ellipse(bx+50,by+50,20,20);
 // draw button
 rect(buttonX,buttonY,buttonSize,buttonSize);  
-print(boolButton);
-  print(listOfCoordinatesX) ;
+  if(boolButton && mouseIsPressed) { fill(200);
+rect(buttonX,buttonY,buttonSize,buttonSize); }
+// print(boolButton);
+ // print(listOfCoordinatesX) ;
 }
 //  //  //  //  //  //  //  //
  function mousePressed() {
@@ -108,11 +110,19 @@ print(boolButton);
   }
 }
 function mouseReleased() {
-  bool_mouseReleased=true;
+ bool_mouseReleased=true;
   locked = false;
-  bx=storX;
-  by=storY;
-}
+   if(boolButton==false){
+   bx=storX;
+   by=storY; 
+  } else if (boolButton==true){
+    //if list not emty
+    if(listOfCoordinatesX.length!=0){
+   bx=listOfCoordinatesX.pop();
+ by=listOfCoordinatesY.pop();   
+   }  
+  }
+} 
 // button
  function buttonUpdate() {
    if (mouseX >= buttonX && mouseX <= buttonX+buttonSize && 
