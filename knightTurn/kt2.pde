@@ -1,7 +1,7 @@
 // притягивание коня к центру
-// объявляем mouseIndikator; storX; storY;
+// объявляем bool_mouseReleased; storX; storY;
 
-boolean mouseIndikator;
+boolean bool_mouseReleased;
 
 float storX;
 float storY;
@@ -66,10 +66,9 @@ void draw() {
   fill(50);
   ellipse(bx+50,by+50,20,20);
  }
-//@@@@@@@@@@@@@@@@@@@@@@@
-//                     @@
-//@@@@@@@@@@@@@@@@@@@@@@@
-
+//       //       //       //
+//           Class         //              
+//       //       //       //
 class Module {
   int xO;
   int yO;
@@ -81,22 +80,12 @@ class Module {
   }
   // Custom method for drawing the object
   void mouseClick() {
-   /* 
    if (mouseX >= xO && mouseX <= xO+100 && 
-      mouseY >= yO && mouseY <= yO+100) {
-   if (overBox && mousePressed && (mouseButton == LEFT)) {
-     k=k+1; if(k>255) k=255;
-    storX=xO;
-    storY=yO;
-            } 
-       }
-     */  
-    if (mouseX >= xO && mouseX <= xO+100 && 
       mouseY >= yO && mouseY <= yO+100) {
    if (overBox && mousePressed && (mouseButton == LEFT)) {
     storX=xO;
     storY=yO; 
-    if(mouseIndikator ) {k=255;} 
+    if(bool_mouseReleased ) {k=255;} 
             } 
        }
   }
@@ -105,8 +94,8 @@ class Module {
   rect(xO, yO, unitSize, unitSize); 
    }
 }
-//########################
-//########################
+//       //       //       //
+//       //       //       //
 void mousePressed() {
   if(overBox) { 
     locked = true; 
@@ -119,13 +108,13 @@ void mousePressed() {
 }
 void mouseDragged() {
   if(locked) {
-    mouseIndikator=false;
+    bool_mouseReleased=false;
     bx = mouseX-xOffset; 
     by = mouseY-yOffset; 
   }
 }
 void mouseReleased() {
-  mouseIndikator=true;
+  bool_mouseReleased=true;
   locked = false;
   bx=storX;
   by=storY;
