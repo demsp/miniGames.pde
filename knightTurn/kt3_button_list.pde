@@ -31,12 +31,10 @@ size(500, 600);
  bx = 0;
   by = 0;
   rectMode(CORNER);
-//  //  //  //  //  //
+//       //       //       //       // 
  listOfCoordinatesX = new IntList();
  listOfCoordinatesY = new IntList();
- listOfCoordinatesX.append(0);
- listOfCoordinatesY.append(0);
-//  //  //  //  //  //
+//       //       //       //       //
  stroke(100);
  
  int wideCount = edgeOfCanvas / unit;
@@ -76,6 +74,8 @@ buttonUpdate();
   // draw button
   rect(buttonX,buttonY,buttonSize,buttonSize);
   println(boolButton);
+  println(listOfCoordinatesX);
+  
  }
 //  //  //  //  //  //  //
 //        Class         // 
@@ -111,6 +111,8 @@ class Module {
 void mousePressed() {
   if(overBox) { 
     locked = true; 
+    listOfCoordinatesX.append(int(bx));
+    listOfCoordinatesY.append(int(by)); 
     } else {
     locked = false;
   }
