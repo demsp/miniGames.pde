@@ -68,7 +68,7 @@ void draw() {
 class Module {
   int xO;
   int yO;
- int k=0;
+ int modColor=0;
   // Contructor
   Module(int xOT, int yOT){
     xO = xOT;
@@ -81,12 +81,12 @@ class Module {
    if (overBox && mousePressed && (mouseButton == LEFT)) {
     storX=xO;
     storY=yO; 
-    if(bool_mouseReleased ) {k=255;} 
+    if(bool_mouseReleased ) {modColor=255;} 
             } 
        }
   }
  void update() {
-  fill(k);
+  fill(modColor);
   rect(xO, yO, unitSize, unitSize); 
    }
 }
