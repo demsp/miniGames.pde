@@ -5,7 +5,6 @@ boolean overBox = false;
 boolean locked = false;
 float xOffset = 0.0; 
 float yOffset = 0.0; 
-//######################
 int unit = 100; // -> width / unit;
 int unitSize=100; 
 int count;
@@ -20,7 +19,6 @@ size(500, 500);
   //rectMode(CORNERS);
    // rectMode(CENTER);
     //  rectMode(RADIUS);  
-//###############
  stroke(100);
  
  int wideCount = width / unit;
@@ -36,13 +34,12 @@ size(500, 500);
 }
 void draw() {
   background(0);
-///
-  //####################
+//       //       //
   for (Module mod : mods) {
-    mod.mouseClicke();
+    mod.mouseClick();
      mod.update();
   }
- //#################3
+ //      //       //
  // Test if the cursor is over the box 
   if (mouseX > bx-boxSize && mouseX < bx+boxSize && 
       mouseY > by-boxSize && mouseY < by+boxSize) {
@@ -51,37 +48,35 @@ void draw() {
   // Draw the box
   rect(bx, by, boxSize, boxSize);
 }
-//################
-//#     Class    #
-//################
+//  //  //  //  //
+//     Class    //
+//  //  //  //  //
 class Module {
   int xO;
   int yO;
- int k=0;
+ int unitColor=0;
   // Contructor
   Module(int xOT, int yOT){
     xO = xOT;
     yO = yOT;
   }
   // Custom method for drawing the object
-  void mouseClicke() {
+  void mouseClick() {
     
    if (mouseX >= xO && mouseX <= xO+100 && 
       mouseY >= yO && mouseY <= yO+100) {
    if (mousePressed && (mouseButton == LEFT)) {
-    //k=k+10; if(k>255) 
-    k=200;  } 
-          }
-   
-}
+      unitColor  =200;  
+      } 
+     }
+   }
  void update() {
-  fill(k);
-  rect(xO, yO, unitSize, unitSize); 
-  
+  fill(unitColor);
+  rect(xO, yO, unitSize, unitSize);  
   }
 }
 
-//########################  
+//  //  //  //  //  
 void mousePressed() {
   if(overBox) { 
     locked = true; 
