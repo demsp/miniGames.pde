@@ -2,7 +2,6 @@
 // объявляем bool_mouseReleased; storX; storY;
 
 boolean bool_mouseReleased;
-
 float storX;
 float storY;
 
@@ -15,7 +14,6 @@ boolean overBox = false;
 boolean locked = false;
 float xOffset = 0.0; 
 float yOffset = 0.0; 
-//######################
 int unit = 100; // -> width / unit;
 int unitSize=100; 
 int count;
@@ -23,12 +21,11 @@ int count;
 Module[] mods;
 
 void setup() {
-//size(500, 500);
 size(600, 600);
  bx = 0;
   by = 0;
   rectMode(CORNER);
-//###############
+//       //       //       //
  stroke(100);
  
  int wideCount = edgeOfCanvas / unit;
@@ -44,13 +41,12 @@ size(600, 600);
 }
 void draw() {
   background(0);
-///
-  //####################
+  //     //       //       //
   for (Module mod : mods) {
     mod.mouseClick();
      mod.update();
   }
- //#################3
+ //      //       //       //
  // Test if the cursor is over the box 
  fill(200);
   if (mouseX > bx && mouseX < bx+boxSize && 
