@@ -19,7 +19,7 @@ class Module {
     rect(this.xO, this.yO, unitSize, unitSize); 
   }
 }
-//######################  
+//  //  //  // 
 let bx;
 let by;
 let boxSize = 100;
@@ -27,7 +27,6 @@ let overBox = false;
 let locked = false;
 let xOffset = 0.0; 
 let yOffset = 0.0; 
-//######################
 let unit = 100; // -> width / unit;
 let unitSize=100; 
 let count;
@@ -56,7 +55,7 @@ function draw() {
     mods[i].mouseClick();
     mods[i].update();    
    }
- //#################
+ // //  //  //  //
  // Test if the cursor is over the box 
   if (mouseX > bx-boxSize && mouseX < bx+boxSize && 
       mouseY > by-boxSize && mouseY < by+boxSize) {
