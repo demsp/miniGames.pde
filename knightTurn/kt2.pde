@@ -1,3 +1,6 @@
+// притягивание коня к центру
+// объявляем mouseIndikator; storX; storY;
+
 boolean mouseIndikator;
 
 float storX;
@@ -44,7 +47,7 @@ void draw() {
 ///
   //####################
   for (Module mod : mods) {
-    mod.mouseClicke();
+    mod.mouseClick();
      mod.update();
   }
  //#################3
@@ -77,7 +80,7 @@ class Module {
     yO = yOT;
   }
   // Custom method for drawing the object
-  void mouseClicke() {
+  void mouseClick() {
    /* 
    if (mouseX >= xO && mouseX <= xO+100 && 
       mouseY >= yO && mouseY <= yO+100) {
