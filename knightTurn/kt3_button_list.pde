@@ -1,8 +1,8 @@
 // list
-IntList listOfCoordinateX;
-IntList listOfCoordinateY;
-int getX;
-int getY;
+IntList listOfCoordinatesX;
+IntList listOfCoordinatesY;
+//int getX;
+//int getY;
 //button
 int buttonX=25, buttonY=525;      // Position of square button
 int buttonSize = 50;     // Diameter of square button
@@ -32,10 +32,10 @@ size(500, 600);
   by = 0;
   rectMode(CORNER);
 //  //  //  //  //  //
- listOfCoordinateX = new IntList();
- listOfCoordinateY = new IntList();
- listOfCoordinateX.append(0);
- listOfCoordinateY.append(0);
+ listOfCoordinatesX = new IntList();
+ listOfCoordinatesY = new IntList();
+ listOfCoordinatesX.append(0);
+ listOfCoordinatesY.append(0);
 //  //  //  //  //  //
  stroke(100);
  
