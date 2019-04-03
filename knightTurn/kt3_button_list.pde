@@ -84,7 +84,7 @@ buttonUpdate();
 class Module {
   int xO;
   int yO;
- int unitColor=0;
+ int modColor=0;
   // Contructor
   Module(int xOT, int yOT){
     xO = xOT;
@@ -97,12 +97,12 @@ class Module {
    if (overBox && mousePressed && (mouseButton == LEFT)) {
     storX=xO;
     storY=yO; 
-    if(bool_mouseReleased ) {unitColor=255;} 
+    if(bool_mouseReleased ) {modColor=255;} 
             } 
        }
   }
  void update() {
-  fill(unitColor);
+  fill(modColor);
   rect(xO, yO, unitSize, unitSize); 
    }
 }
