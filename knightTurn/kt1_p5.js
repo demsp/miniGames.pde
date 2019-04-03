@@ -35,6 +35,7 @@ let mods = [];
 
 function setup () {
    createCanvas(500, 500);
+   rectMode(CORNER);
  bx = width/2.0;
   by = height/2.0;
  stroke(100);
@@ -57,8 +58,8 @@ function draw() {
    }
  // //  //  //  //
  // Test if the cursor is over the box 
-  if (mouseX > bx-boxSize && mouseX < bx+boxSize && 
-      mouseY > by-boxSize && mouseY < by+boxSize) {
+  if (mouseX > bx && mouseX < bx+boxSize && 
+      mouseY > by && mouseY < by+boxSize) {
     overBox = true;  
   } else {    overBox = false;  }
   // Draw the box
