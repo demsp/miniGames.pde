@@ -25,7 +25,6 @@ size(600, 600);
  bx = 0;
   by = 0;
   rectMode(CORNER);
-//       //       //       //
  stroke(100);
  
  int wideCount = edgeOfCanvas / unit;
@@ -40,8 +39,7 @@ size(600, 600);
   }
 }
 void draw() {
-  background(0);
-  //     //       //       //
+  background(0); 
   for (Module mod : mods) {
     mod.mouseClick();
      mod.update();
@@ -56,46 +54,40 @@ void draw() {
      overBox = false;  
         }
  fill(255);
-  rect(0,0,100,100);
- 
+  rect(0,0,100,100); 
   rect(bx, by, boxSize, boxSize);
   fill(50);
   ellipse(bx+50,by+50,20,20);
  }
-//       //       //       //
-//           Class         //              
-//       //       //       //
 class Module {
-  int xO;
-  int yO;
+  int x;
+  int y;
  int modColor=0;
   // Contructor
-  Module(int xOT, int yOT){
-    xO = xOT;
-    yO = yOT;
+  Module(int xT, int yT){
+    x = xT;
+    y = yT;
   }
   // Custom method for drawing the object
   void mouseClick() {
-   if (mouseX >= xO && mouseX <= xO+100 && 
-      mouseY >= yO && mouseY <= yO+100) {
+   if (mouseX >= x && mouseX <= x+100 && 
+      mouseY >= y && mouseY <= y+100) {
    if (overBox && mousePressed && (mouseButton == LEFT)) {
-    storX=xO;
-    storY=yO; 
-    if(bool_mouseReleased ) {modColor=255;} 
+    storX=x;
+    storY=y; 
+    if(bool_mouseReleased ){ 
+    modColor=255; } 
             } 
        }
   }
  void update() {
   fill(modColor);
-  rect(xO, yO, unitSize, unitSize); 
+  rect(x, y, unitSize, unitSize); 
    }
 }
-//       //       //       //
-//       //       //       //
 void mousePressed() {
   if(overBox) { 
-    locked = true; 
-   
+    locked = true;   
   } else {
     locked = false;
   }
