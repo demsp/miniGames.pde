@@ -1,22 +1,21 @@
 class Module {
-  constructor( xO,  yO, modColor){
-    this.xO = xO;
-    this.yO = yO;
+  constructor( x,  y, modColor){
+    this.x = x;
+    this.y = y;
     this.modColor=modColor;
   }
   // Custom method for drawing the object
-   mouseClick() {
-    
-   if (mouseX >= this.xO && mouseX <= this.xO+100 && 
-      mouseY >= this.yO && mouseY <= this.yO+100) {
-   if (mouseIsPressed && (mouseButton == LEFT)) {
+   mouseClick() {    
+   if ((mouseX >= this.x && mouseX <= this.x+100 && 
+      mouseY >= this.y && mouseY <= this.y+100) &&
+    (locked && mouseIsPressed && (mouseButton == LEFT))) {
         this.modColor=200;       
-        } 
+         
       }
    }
   update() {
    fill(this.modColor);
-    rect(this.xO, this.yO, unitSize, unitSize); 
+    rect(this.x, this.y, unitSize, unitSize); 
   }
 }
 //  //  //  // 
@@ -63,6 +62,7 @@ function draw() {
     overBox = true;  
   } else {    overBox = false;  }
   // Draw the box
+  fill(200);
   rect(bx, by, boxSize, boxSize);
 }
  function mousePressed() {
