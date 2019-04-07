@@ -1,15 +1,13 @@
 // list
 IntList listOfCoordinatesX;
 IntList listOfCoordinatesY;
-//int getX;
-//int getY;
 //button
-int buttonX=25, buttonY=525; // Position of square button
-int buttonSize = 50;     // Diameter of square button
+int buttonX=25, buttonY=525; 
+int buttonSize = 50;     
 boolean boolButton = false;
 //mouse
 boolean bool_mouseReleased;
-// jump to rect center on release
+// jump to rect center on button release
 float storX;
 float storY;
 
@@ -22,7 +20,6 @@ boolean overKnight = false;
 boolean locked = false;
 float xOffset = 0.0; 
 float yOffset = 0.0; 
-//######################
 int unit = 100; // -> width / unit;
 int unitSize=100; 
 int count;
@@ -31,11 +28,11 @@ Module[] mods;
 
 void setup() {
 
-size(600, 600);
+size(500, 600);
 stroke(100);
   knightX = 0;
   knightY = 0;
-  rectMode(CORNER);  
+rectMode(CORNER);  
  listOfCoordinatesX = new IntList();
  listOfCoordinatesY = new IntList(); 
  
@@ -48,7 +45,7 @@ stroke(100);
     for (int x = 0; x < wideCount; x++) {
       mods[index++] = new Module(x*unit, y*unit);
     }
-  }
+   }
 }
 void draw() {
   background(0);
@@ -67,8 +64,7 @@ void draw() {
      overKnight = false;  
         }
  fill(200);
-  rect(0,0,100,100);
- 
+ rect(0,0,100,100); 
   rect(knightX, knightY, knightSize, knightSize);
   fill(50);
   ellipse(knightX+50,knightY+50,20,20);
@@ -88,7 +84,8 @@ class Module {
   Module(int xT, int yT){
     x = xT;
     y = yT;
-  }  
+  }
+  
   void mouseClick() {
     if (mouseX >= x && mouseX <= x+100 && 
       mouseY >= y && mouseY <= y+100) {
@@ -97,7 +94,7 @@ class Module {
     storY=y; 
     if(bool_mouseReleased ) {modColor=200;} 
             } 
-       }
+          }
   }
  void update() {
   fill(modColor);
@@ -138,10 +135,7 @@ void mouseReleased() {
        listOfCoordinatesX.remove(listOfCoordinatesX.size()-1);
        listOfCoordinatesY.remove(listOfCoordinatesY.size()-1);
        }
-     }
-  // println(listOfCoordinatesX);
-  // println(listOfCoordinatesY);
-  // println();
+     }  
 }
 // button
  void buttonUpdate() {
