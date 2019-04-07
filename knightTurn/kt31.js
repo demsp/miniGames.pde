@@ -3,10 +3,8 @@ class Module {
     this.x = x;
     this.y = y;
     this.modColor=modColor;
-  }
-  // Custom method for drawing the object
-   mouseClick() {
-    
+  }  
+   mouseClick() {    
    if (mouseX >= this.x && mouseX <= this.x+100 && 
       mouseY >= this.y && mouseY <= this.y+100) {
    if (overKnight && mouseIsPressed && (mouseButton == LEFT)) {
@@ -85,10 +83,8 @@ function draw() {
 rect(buttonX,buttonY,buttonSize,buttonSize);  
   if(boolButton && mouseIsPressed) { fill(200);
 rect(buttonX,buttonY,buttonSize,buttonSize); }
-// print(boolButton);
- // print(listOfCoordinatesX) ;
 }
-//  //  //  //  //  //  //  //
+
  function mousePressed() {
   if(overKnight) { 
     locked = true; 
