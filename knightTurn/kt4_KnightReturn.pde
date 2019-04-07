@@ -52,7 +52,7 @@ buttonUpdate();
   for (Module mod : mods) {
      mod.mouseClick();
      mod.update();
-     mod.KnightReturn();
+     mod.knightReturn();
   }
  // Test if the cursor is over the box 
  if (mouseX > knightX && mouseX < knightX+knightSize && 
@@ -95,7 +95,7 @@ class Module {
             }
        }
   }
-  void KnightReturn(){
+  void knightReturn(){
     if(buttonOver&& mousePressed){
     if(listOfCoordinateX.size()!=0){
    if(int(x)==listOfCoordinateX.get(listOfCoordinateX.size()-1) &&  
