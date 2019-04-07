@@ -1,15 +1,15 @@
-// притягивание коня к центру
+// притягивание коня к центру клетки
 // объявляем bool_mouseReleased; storX; storY;
 
 boolean bool_mouseReleased;
 float storX;
 float storY;
 
-float bx;
-float by;
+float knightX;
+float knightY;
 // size of canvas 600*600
 int edgeOfCanvas=600;
-int boxSize = 100;
+int knightSize = 100;
 boolean overBox = false;
 boolean locked = false;
 float xOffset = 0.0; 
@@ -22,8 +22,8 @@ Module[] mods;
 
 void setup() {
 size(600, 600);
- bx = 0;
-  by = 0;
+ knightX = 0;
+  knightY = 0;
   rectMode(CORNER);
  stroke(100);
  
@@ -47,18 +47,20 @@ void draw() {
  //      //       //       //
  // Test if the cursor is over the box 
  fill(200);
-  if (mouseX > bx && mouseX < bx+boxSize && 
-      mouseY > by && mouseY < by+boxSize) {
+  if (mouseX > knightX && mouseX < knightX+knightSize && 
+      mouseY > knightY && mouseY < knightY+knightSize) {
     overBox = true;  
   } else {
      overBox = false;  
         }
- fill(255);
+  fill(200);
   rect(0,0,100,100); 
-  rect(bx, by, boxSize, boxSize);
+  rect(knightX, knightY, knightSize, knightSize);
   fill(50);
-  ellipse(bx+50,by+50,20,20);
+  ellipse(knightX+50,knightY+50,20,20);
  }
+ 
+ 
 class Module {
   int x;
   int y;
@@ -70,40 +72,39 @@ class Module {
   }
   // Custom method for drawing the object
   void mouseClick() {
-   if (mouseX >= x && mouseX <= x+100 && 
-      mouseY >= y && mouseY <= y+100) {
-   if (overBox && mousePressed && (mouseButton == LEFT)) {
+   if ((mouseX >= x && mouseX <= x+100 && 
+      mouseY >= y && mouseY <= y+100)&& 
+    (overBox && mousePressed && (mouseButton == LEFT))) {
     storX=x;
     storY=y; 
-    if(bool_mouseReleased ){ 
-    modColor=255; } 
-            } 
-       }
+    if(bool_mouseReleased ){ modColor=200; } 
+            }        
   }
  void update() {
   fill(modColor);
   rect(x, y, unitSize, unitSize); 
    }
 }
+
 void mousePressed() {
   if(overBox) { 
     locked = true;   
   } else {
     locked = false;
   }
-  xOffset = mouseX-bx; 
-  yOffset = mouseY-by; 
+  xOffset = mouseX-knightX; 
+  yOffset = mouseY-knightY; 
 }
 void mouseDragged() {
   if(locked) {
     bool_mouseReleased=false;
-    bx = mouseX-xOffset; 
-    by = mouseY-yOffset; 
+    knightX = mouseX-xOffset; 
+    knightY = mouseY-yOffset; 
   }
 }
 void mouseReleased() {
   bool_mouseReleased=true;
   locked = false;
-  bx=storX;
-  by=storY;
+  knightX=storX;
+  knightY=storY;
 }
