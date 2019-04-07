@@ -97,7 +97,7 @@ class Module {
   }
  void update() {
   fill(modColor);
-  rect(x, y, knightSize, knightSize); 
+  rect(x, y, unitSize, unitSize); 
    }
 }
 
