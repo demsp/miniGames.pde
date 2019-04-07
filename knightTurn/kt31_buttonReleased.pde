@@ -13,12 +13,12 @@ boolean bool_mouseReleased;
 float storX;
 float storY;
 
-float bx;
-float by;
+float knightX;
+float knightY;
 // size of canvas 
 int edgeOfCanvas=500;
-int boxSize = 100;
-boolean overBox = false;
+int knightSize = 100;
+boolean overKnight = false;
 boolean locked = false;
 float xOffset = 0.0; 
 float yOffset = 0.0; 
@@ -30,16 +30,14 @@ int count;
 Module[] mods;
 
 void setup() {
-//size(500, 500);
+
 size(600, 600);
- bx = 0;
-  by = 0;
-  rectMode(CORNER);
-//    //    //    //    //    //  
+stroke(100);
+  knightX = 0;
+  knightY = 0;
+  rectMode(CORNER);  
  listOfCoordinatesX = new IntList();
- listOfCoordinatesY = new IntList();
-//    //    //    //    //    //
- stroke(100);
+ listOfCoordinatesY = new IntList(); 
  
  int wideCount = edgeOfCanvas / unit;
   int highCount = edgeOfCanvas / unit;
@@ -54,8 +52,7 @@ size(600, 600);
 }
 void draw() {
   background(0);
-buttonUpdate();
-  //    //    //    //    //
+   buttonUpdate();
   for (Module mod : mods) {
     mod.mouseClick();
      mod.update();
@@ -63,84 +60,80 @@ buttonUpdate();
  //      //      //      //
  // Test if the cursor is over the box 
  fill(200);
-  if (mouseX > bx && mouseX < bx+boxSize && 
-      mouseY > by && mouseY < by+boxSize) {
-    overBox = true;  
+  if (mouseX > knightX && mouseX < knightX+knightSize && 
+      mouseY > knightY && mouseY < knightY+knightSize) {
+    overKnight = true;  
   } else {
-     overBox = false;  
+     overKnight = false;  
         }
- fill(255);
+ fill(200);
   rect(0,0,100,100);
  
-  rect(bx, by, boxSize, boxSize);
+  rect(knightX, knightY, knightSize, knightSize);
   fill(50);
-  ellipse(bx+50,by+50,20,20);
+  ellipse(knightX+50,knightY+50,20,20);
   // draw button
   rect(buttonX,buttonY,buttonSize,buttonSize);
   if(boolButton && mousePressed) { fill(200);
    rect(buttonX,buttonY,buttonSize,buttonSize); }
  //println(buttonOver);
  }
-//      //      //      //
-//       Class          //
-//      //      //      //
+
 
 class Module {
-  int xO;
-  int yO;
+  int x;
+  int y;
  int modColor=0;
   // Contructor
-  Module(int xOT, int yOT){
-    xO = xOT;
-    yO = yOT;
-  }
-  // Custom method for drawing the object
+  Module(int xT, int yT){
+    x = xT;
+    y = yT;
+  }  
   void mouseClick() {
-    if (mouseX >= xO && mouseX <= xO+100 && 
-      mouseY >= yO && mouseY <= yO+100) {
-   if (overBox && mousePressed && (mouseButton == LEFT)) {
-    storX=xO;
-    storY=yO; 
-    if(bool_mouseReleased ) {modColor=255;} 
+    if (mouseX >= x && mouseX <= x+100 && 
+      mouseY >= y && mouseY <= y+100) {
+   if (overKnight && mousePressed && (mouseButton == LEFT)) {
+    storX=x;
+    storY=y; 
+    if(bool_mouseReleased ) {modColor=200;} 
             } 
        }
   }
  void update() {
   fill(modColor);
-  rect(xO, yO, unitSize, unitSize); 
+  rect(x, y, unitSize, unitSize); 
    }
 }
-//      //      //      //      //
-//      //      //      //      //
+
 void mousePressed() {
-  if(overBox) { 
+  if(overKnight) { 
     locked = true; 
-     listOfCoordinatesX.append(int(bx));
-      listOfCoordinatesY.append(int(by));    
+     listOfCoordinatesX.append(int(knightX));
+      listOfCoordinatesY.append(int(knightY));    
   } else {
     locked = false;
    }
-  xOffset = mouseX-bx; 
-  yOffset = mouseY-by; 
+  xOffset = mouseX-knightX; 
+  yOffset = mouseY-knightY; 
 }
 void mouseDragged() {
   if(locked) {
     bool_mouseReleased=false;
-    bx = mouseX-xOffset; 
-    by = mouseY-yOffset; 
+    knightX = mouseX-xOffset; 
+    knightY = mouseY-yOffset; 
   }
 }
 void mouseReleased() {
   bool_mouseReleased=true;
   locked = false;
   if(!boolButton){
-  bx=storX;
-  by=storY; }
+  knightX=storX;
+  knightY=storY; }
  else if(boolButton){
    //if list not emty
    if(listOfCoordinatesX.size()!=0){
-  bx=listOfCoordinatesX.get(listOfCoordinatesX.size()-1);
-  by=listOfCoordinatesY.get(listOfCoordinatesY.size()-1);
+  knightX=listOfCoordinatesX.get(listOfCoordinatesX.size()-1);
+  knightY=listOfCoordinatesY.get(listOfCoordinatesY.size()-1);
    /// remove last element of list
        listOfCoordinatesX.remove(listOfCoordinatesX.size()-1);
        listOfCoordinatesY.remove(listOfCoordinatesY.size()-1);
