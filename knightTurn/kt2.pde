@@ -1,5 +1,5 @@
 // притягивание коня к центру клетки
-// объявляем bool_mouseReleased; storX; storY;
+// объявляем bool_mouseReleased storX storY
 
 boolean bool_mouseReleased;
 float storX;
@@ -10,7 +10,7 @@ float knightY;
 // size of canvas 600*600
 int edgeOfCanvas=600;
 int knightSize = 100;
-boolean overBox = false;
+boolean overKnight = false;
 boolean locked = false;
 float xOffset = 0.0; 
 float yOffset = 0.0; 
@@ -49,9 +49,9 @@ void draw() {
  fill(200);
   if (mouseX > knightX && mouseX < knightX+knightSize && 
       mouseY > knightY && mouseY < knightY+knightSize) {
-    overBox = true;  
+    overKnight = true;  
   } else {
-     overBox = false;  
+     overKnight = false;  
         }
   fill(200);
   rect(0,0,100,100); 
@@ -74,7 +74,7 @@ class Module {
   void mouseClick() {
    if ((mouseX >= x && mouseX <= x+100 && 
       mouseY >= y && mouseY <= y+100)&& 
-    (overBox && mousePressed && (mouseButton == LEFT))) {
+    (overKnight && mousePressed && (mouseButton == LEFT))) {
     storX=x;
     storY=y; 
     if(bool_mouseReleased ){ modColor=200; } 
@@ -87,7 +87,7 @@ class Module {
 }
 
 void mousePressed() {
-  if(overBox) { 
+  if(overKnight) { 
     locked = true;   
   } else {
     locked = false;
