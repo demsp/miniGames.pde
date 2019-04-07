@@ -1,35 +1,35 @@
 class Module {
-  constructor( xO,  yO, modColor){
-    this.xO = xO;
-    this.yO = yO;
+  constructor( x,  y, modColor){
+    this.x = x;
+    this.y = y;
     this.modColor=modColor;
   }
   // Custom method for drawing the object
    mouseClick() {    
-   if (mouseX >= this.xO && mouseX <= this.xO+100 && 
-      mouseY >= this.yO && mouseY <= this.yO+100) {
-   if (overBox && mouseIsPressed && (mouseButton == LEFT)) {
-     storX=this.xO;
-      storY=this.yO; 
+   if (mouseX >= this.x && mouseX <= this.x+100 && 
+      mouseY >= this.y && mouseY <= this.y+100) {
+   if (overKnight && mouseIsPressed && (mouseButton == LEFT)) {
+     storX=this.x;
+      storY=this.y; 
       if(bool_mouseReleased == true) {this.modColor=200;}               
       } 
      }
   }
-  KnightReturn(){    
+  knightReturn(){    
     if(boolButton && mouseIsPressed){      
     if(listOfCoordinatesX.length!=0){       
-   if(this.xO == listOfCoordinatesX.slice(-1) &&  
-   this.yO == listOfCoordinatesY.slice(-1) )   
+   if(this.x == listOfCoordinatesX.slice(-1) &&  
+   this.y == listOfCoordinatesY.slice(-1) )   
       {this.modColor=20;} 
       } 
      }
   }
   update() {
    fill(this.modColor);
-    rect(this.xO, this.yO, unitSize, unitSize); 
+    rect(this.x, this.y, unitSize, unitSize); 
   }
 }
-//  //  //  // 
+ 
 // list
 let listOfCoordinatesX=[];
 let listOfCoordinatesY=[];
@@ -42,9 +42,9 @@ let bool_mouseReleased=false;
 let storX=0, storY=0;
 
 let edgeOfCanvas=500;
-let bx=0, by=0;
-let boxSize = 100;
-let overBox = false;
+let knightX=0, knightY=0;
+let knightSize = 100;
+let overKnight = false;
 let locked = false;
 let xOffset = 0.0, yOffset = 0.0; 
 let unit = 100; // -> width / unit;
@@ -59,7 +59,7 @@ function setup () {
  stroke(100);
  
  let wideCount = edgeOfCanvas / unit;
-  let highCount = edgeOfCanvas / unit;
+ let highCount = edgeOfCanvas / unit;
   count = wideCount * highCount;
     let index = 0;
   for (let y = 0; y < highCount; y++) {
@@ -69,64 +69,62 @@ function setup () {
     }
 }
 function draw() {
-  background(0);
-   buttonUpdate();
+ background(0);
+  buttonUpdate();
  for (let i = 0; i < count; i++) {
     mods[i].mouseClick();
     mods[i].update();
-    mods[i].KnightReturn();
+    mods[i].knightReturn();
    }
  // //  //  //  //
  // Test if the cursor is over the box 
-  if (mouseX > bx && mouseX < bx+boxSize && 
-      mouseY > by && mouseY < by+boxSize) {
-    overBox = true;  
-  } else {    overBox = false;  }
+  if (mouseX > knightX && mouseX < knightX+knightSize && 
+      mouseY > knightY && mouseY < knightY+knightSize) {
+    overKnight = true;  
+  } else {    overKnight = false;  }
   //draw mod 1x1
   fill(200);
   rect(0,0,100,100);
  //draw the Knight
- rect(bx, by, boxSize, boxSize);
+ rect(knightX, knightY, knightSize, knightSize);
   fill(50);
-  ellipse(bx+50,by+50,20,20);
+  ellipse(knightX+50,knightY+50,20,20);
 // draw button
 rect(buttonX,buttonY,buttonSize,buttonSize);  
   if(boolButton && mouseIsPressed) { 
     fill(200);
-     rect(buttonX,buttonY,buttonSize,buttonSize); }
- //print(boolButton);
-  //print(listOfCoordinatesX) ;
+     rect(buttonX,buttonY,buttonSize,buttonSize); } 
 }
-//  //  //  //  //  //  //  //
+
  function mousePressed() {
-  if(overBox) { 
+  if(overKnight) { 
     locked = true; 
-    listOfCoordinatesX.push(bx);
-    listOfCoordinatesY.push(by); 
+    listOfCoordinatesX.push(knightX);
+    listOfCoordinatesY.push(knightY); 
     } else {
     locked = false;
   }
-  xOffset = mouseX-bx; 
-  yOffset = mouseY-by; 
+  xOffset = mouseX-knightX; 
+  yOffset = mouseY-knightY; 
 }
  function mouseDragged() {
   bool_mouseReleased=false;
   if(locked) {
-    bx = mouseX-xOffset; 
-    by = mouseY-yOffset; 
+    knightX = mouseX-xOffset; 
+    knightY = mouseY-yOffset; 
   }
 }
 function mouseReleased() {
  bool_mouseReleased=true;
   locked = false;
    if(boolButton==false){
-   bx=storX;
-   by=storY; 
+   knightX=storX;
+   knightY=storY; 
   } else if (boolButton==true){
     //if list not emty
     if(listOfCoordinatesX.length!=0){
-   bx=listOfCoordinatesX.pop();
-  by=listOfCoordinatesY.pop();   
+   knightX=listOfCoordinatesX.pop();
+   knightY=listOfCoordinatesY.pop();   
    }  
   }
 } 
