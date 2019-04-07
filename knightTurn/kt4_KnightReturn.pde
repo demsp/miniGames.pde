@@ -1,30 +1,25 @@
-//Color 30, 200 
 // list
 IntList listOfCoordinateX;
 IntList listOfCoordinateY;
-//IntList
-IntList listX;
-IntList listY;
 //button
-int buttonX=25, buttonY;      // Position of square button
-int buttonSize = 50;     // Diameter of square button
+int buttonX=25, buttonY; 
+int buttonSize = 50;    
 boolean buttonOver = false;
 //mouse
-boolean boolMouseReleased;
+boolean bool_mouseReleased;
 // jump to rect center on mouse release
 float storX;
 float storY;
 // Knight cootdinates 
-float bx;
-float by;
+float knightX;
+float knightY;
 // size of canvas 
 int edgeOfCanvas=500;
-int boxSize = 100;
+int knightSize = 100;
 boolean overKnight = false;
 boolean locked = false;
 float xOffset = 0.0; 
-float yOffset = 0.0; 
-//######################
+float yOffset = 0.0;
 int unit = 100; // -> width / unit;
 int unitSize=100; 
 int count;
@@ -33,19 +28,13 @@ Module[] mods;
 
 void setup() {
 size(500, 600);
- bx = 0;
-  by = 0;
+  knightX = 0;
+  knightY = 0;
    buttonY=edgeOfCanvas+25;
    rectMode(CORNER);
-//###############
  listOfCoordinateX = new IntList();
  listOfCoordinateY = new IntList();
- listX = new IntList();
- listY = new IntList();
-// listOfCoordinateX.append(0);
-// color of square net 
- stroke(100);
- // Create square fields
+stroke(100); //color of the net of edges
  int wideCount = edgeOfCanvas / unit;
   int highCount = edgeOfCanvas / unit;
   count = wideCount * highCount;
@@ -55,122 +44,104 @@ size(500, 600);
     for (int x = 0; x < wideCount; x++) {
       mods[index++] = new Module(x*unit, y*unit);
     }
-  }
+   }
 }
 void draw() {
-  background(0);
-buttonUpdate();
-  //For-loop of class members
+background(0);
+buttonUpdate();  
   for (Module mod : mods) {
-    mod.mouseClick();
+     mod.mouseClick();
      mod.update();
-      mod.KnightReturn();
+     mod.KnightReturn();
   }
  // Test if the cursor is over the box 
- if (mouseX > bx && mouseX < bx+boxSize && 
-      mouseY > by && mouseY < by+boxSize) {
+ if (mouseX > knightX && mouseX < knightX+knightSize && 
+      mouseY > knightY && mouseY < knightY+knightSize) {
     overKnight = true;  
   } else {
      overKnight = false;  
-     }        
- //  fill first Unit      
- fill(200);
+     }      
+  fill(200);
   rect(0,0,100,100);
  // draw Knight
-  rect(bx, by, boxSize, boxSize);
+  rect(knightX, knightY, knightSize, knightSize);
   fill(50);
-  ellipse(bx+50,by+50,20,20);
+  ellipse(knightX+50,knightY+50,20,20);
   // draw button
   rect(buttonX,buttonY,buttonSize,buttonSize);
-  if(buttonOver && mousePressed) { fill(200);
-  rect(buttonX,buttonY,buttonSize,buttonSize); }
-  //println(buttonOver);
-  // println(mousePressed);
-  //println(boolMouseReleased);
-  //println();
+  if(buttonOver && mousePressed) { 
+     fill(200);
+     rect(buttonX,buttonY,buttonSize,buttonSize);  
+     }
  }
-//@@@@@@@@@@@@@@@@@@@@@@@
-//@       Class        @@
-//@@@@@@@@@@@@@@@@@@@@@@@
 
 class Module {
-  int xUnit;
-  int yUnit;
- int colorOfUnit=30;
+  int x;
+  int y;
+ int modColor=30;
   // Contructor
-  Module(int xUnitT, int yUnitT){
-    xUnit = xUnitT;
-    yUnit = yUnitT;
+  Module(int xT, int yT){
+    x = xT;
+    y = yT;
   }
   // Custom method for drawing the object
   void mouseClick() {
-  if (mouseX >= xUnit && mouseX <= xUnit+100 && 
-      mouseY >= yUnit && mouseY <= yUnit+100) {
+  if (mouseX >= x && mouseX <= x+100 && 
+      mouseY >= y && mouseY <= y+100) {
    if (overKnight && mousePressed && (mouseButton == LEFT)) {
-    storX=xUnit;
-    storY=yUnit; 
-    if(boolMouseReleased ) {colorOfUnit=200;} 
+    storX=x;
+    storY=y; 
+    if(bool_mouseReleased ) {modColor=200;} 
             }
        }
   }
   void KnightReturn(){
     if(buttonOver&& mousePressed){
     if(listOfCoordinateX.size()!=0){
-   if(int(xUnit)==listOfCoordinateX.get(listOfCoordinateX.size()-1) &&  
-    int(yUnit)==listOfCoordinateY.get(listOfCoordinateY.size()-1) )   
-      {colorOfUnit=30;} } }
+   if(int(x)==listOfCoordinateX.get(listOfCoordinateX.size()-1) &&  
+    int(y)==listOfCoordinateY.get(listOfCoordinateY.size()-1) )   
+      {modColor=30;} } }
   }
  void update() {
-   fill(colorOfUnit);
-    rect(xUnit, yUnit, unitSize, unitSize); 
+   fill(modColor);
+    rect(x, y, unitSize, unitSize); 
    }
 }
-//########################
-//########################
+
 void mousePressed() {
   if(overKnight) { 
     locked = true; 
-     listOfCoordinateX.append(int(bx));
-      listOfCoordinateY.append(int(by));  
-       listX.append(int(bx/100+1));
-        listY.append(int(by/100+1));
+     listOfCoordinateX.append(int(knightX));
+     listOfCoordinateY.append(int(knightY));        
   } else {
     locked = false;
    }
-  xOffset = mouseX-bx; 
-  yOffset = mouseY-by; 
+  xOffset = mouseX-knightX; 
+  yOffset = mouseY-knightY; 
 }
 void mouseDragged() {
   if(locked) {
-    boolMouseReleased=false;
-    bx = mouseX-xOffset; 
-    by = mouseY-yOffset; 
+    bool_mouseReleased=false;
+    knightX = mouseX-xOffset; 
+    knightY = mouseY-yOffset; 
   }
 }
 void mouseReleased() {
-  boolMouseReleased=true;
+  bool_mouseReleased=true;
   locked = false;
   if(!buttonOver){
-  bx=storX;
-  by=storY; }
+  knightX=storX;
+  knightY=storY; }
  else if(buttonOver){
    //if list not emty
   if(listOfCoordinateX.size()!=0){
-   bx=listOfCoordinateX.get(listOfCoordinateX.size()-1);
-   by=listOfCoordinateY.get(listOfCoordinateY.size()-1);
-   
+   knightX=listOfCoordinateX.get(listOfCoordinateX.size()-1);
+   knightY=listOfCoordinateY.get(listOfCoordinateY.size()-1);   
    /// remove last element of list
        listOfCoordinateX.remove(listOfCoordinateX.size()-1);
-       listOfCoordinateY.remove(listOfCoordinateY.size()-1);
-         listX.remove(listOfCoordinateX.size());
-         listY.remove(listOfCoordinateY.size());
+       listOfCoordinateY.remove(listOfCoordinateY.size()-1);         
         }
-     }
-   //println(listOfCoordinateX);
-   //println(listOfCoordinateY);
-   println(listX);
-   println(listY);
-   println(); 
+     }    
 }
 // button
  void buttonUpdate() {
