@@ -4,7 +4,7 @@ class Module {
     this.y = y;
     this.modColor=modColor;
   }
-  // Custom method for drawing the object
+  // Custom methods for drawing the object
    mouseClick() {    
    if ((mouseX >= this.x && mouseX <= this.x+100 && 
       mouseY >= this.y && mouseY <= this.y+100) &&
