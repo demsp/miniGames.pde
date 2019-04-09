@@ -86,8 +86,10 @@ class Module {
   }
   // Custom method for drawing the object
   void mouseClick() {
-  if (mouseX >= x && mouseX <= x+100 && 
-      mouseY >= y && mouseY <= y+100) {
+  //if (mouseX >= x && mouseX <= x+100 && 
+  //    mouseY >= y && mouseY <= y+100) {
+    if (knightX+50 >= x && knightX+50 <= x+100 && 
+      knightY+50 >= y && knightY+50 <= y+100) {
    if (overKnight && mousePressed && (mouseButton == LEFT)) {
     storX=x;
     storY=y; 
