@@ -1,3 +1,4 @@
+// kt211
 // list
 IntList listOfCoordinatesX;
 IntList listOfCoordinatesY;
@@ -137,13 +138,14 @@ void mouseReleased() {
       listOfCoordinatesY.append(int(knightY));
                 }
   if(boolButton){
-   //if list not emty
-   if(listOfCoordinatesX.size()!=0){
+   //if list is not emty
+   if(listOfCoordinatesX.size()>0){
   knightX=listOfCoordinatesX.get(listOfCoordinatesX.size()-1);
   knightY=listOfCoordinatesY.get(listOfCoordinatesY.size()-1);
    /// remove last element of list
+     if(listOfCoordinatesX.size()>1){ //нулевой элемент не удаляем
        listOfCoordinatesX.remove(listOfCoordinatesX.size()-1);
-       listOfCoordinatesY.remove(listOfCoordinatesY.size()-1);
+       listOfCoordinatesY.remove(listOfCoordinatesY.size()-1); }
        }
      }  
 }
