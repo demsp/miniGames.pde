@@ -1,5 +1,5 @@
 class Module {
-  constructor( x,  y, modColor){
+  constructor(x,  y, modColor){
     this.x = x;
     this.y = y;
     this.modColor=modColor;
@@ -50,7 +50,8 @@ function setup () {
    createCanvas(500, 600);
    rectMode(CORNER);
  stroke(100);
- 
+ listOfCoordinatesX.push(0);
+  listOfCoordinatesY.push(0);
  let wideCount = edgeOfCanvas / unit;
   let highCount = edgeOfCanvas / unit;
   count = wideCount * highCount;
@@ -68,7 +69,7 @@ function draw() {
     mods[i].mouseClick();
     mods[i].update();    
    }
- // //  //  //  //
+ // //  //  //  //      //      //      //      //
  // Test if the cursor is over the box 
   if (mouseX > knightX && mouseX < knightX+knightSize && 
       mouseY > knightY && mouseY < knightY+knightSize) {
@@ -85,13 +86,15 @@ function draw() {
 rect(buttonX,buttonY,buttonSize,buttonSize);  
   if(boolButton && mouseIsPressed) { fill(200);
 rect(buttonX,buttonY,buttonSize,buttonSize); }
+  console.log("\n");
+  console.log(boolButton);
+  console.log(listOfCoordinatesX);
+  console.log(listOfCoordinatesY);
 }
 
- function mousePressed() {
+  function mousePressed() {
   if(overKnight) { 
     locked = true; 
-    listOfCoordinatesX.push(knightX);
-    listOfCoordinatesY.push(knightY); 
     } else {
     locked = false;
   }
@@ -106,19 +109,15 @@ rect(buttonX,buttonY,buttonSize,buttonSize); }
   }
 }
 function mouseReleased() {
- bool_mouseReleased=true;
+  bool_mouseReleased=true;
   locked = false;
-   if(boolButton==false){
-   knightX=storX;
-   knightY=storY; 
-  } else if (boolButton==true){
-    //if list not emty
-    if(listOfCoordinatesX.length!=0){
-   knightX=listOfCoordinatesX.pop();
- knightY=listOfCoordinatesY.pop();   
-   }  
-  }
-} 
+  if(overKnight){
+  knightX=storX;
+  knightY=storY;
+      listOfCoordinatesX.push(knightX);
+      listOfCoordinatesY.push(knightY); 
+                }
+}
 // button
  function buttonUpdate() {
    if (mouseX >= buttonX && mouseX <= buttonX+buttonSize && 
