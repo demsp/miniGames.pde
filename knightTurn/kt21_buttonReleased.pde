@@ -92,9 +92,11 @@ class Module {
    if (overKnight && mousePressed && (mouseButton == LEFT)) {
     storX=x;
     storY=y; 
-    if(bool_mouseReleased ) {modColor=200;} 
-            } 
-          }
+  //  if(bool_mouseReleased ) {modColor=200;} 
+     } 
+    }
+   if( (bool_mouseReleased ) && (x==storX && y==storY ) ){
+       modColor=200;  }       
   }
  void update() {
   fill(modColor);
@@ -152,4 +154,4 @@ boolean overButton(int x, int y, int width, int height)  {
   } else {
     return false;
   }
-}
+}        
