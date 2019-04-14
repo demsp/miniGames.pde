@@ -4,17 +4,21 @@ class Module {
     this.y = y;
     this.modColor=modColor;
   }
-  // Custom method for drawing the object
-   mouseClick() {    
+  // Custom methods for drawing the object
+  mouseClick() {    
    if (mouseX >= this.x && mouseX <= this.x+100 && 
       mouseY >= this.y && mouseY <= this.y+100) {
    if (overKnight && mouseIsPressed && (mouseButton == LEFT)) {
      storX=this.x;
       storY=this.y; 
-    if(bool_mouseReleased == true) {this.modColor=200;} 
+    //if(bool_mouseReleased == true) {this.modColor=200;} 
          } 
       }
-   }
+    if( (bool_mouseReleased==true ) && 
+        (this.x==storX && this.y==storY ) ){
+        this.modColor=200;  }
+   } 
+  
   update() {
    fill(this.modColor);
     rect(this.x, this.y, unitSize, unitSize); 
