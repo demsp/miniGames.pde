@@ -1,4 +1,3 @@
-// kt211
 // list
 IntList listOfCoordinatesX;
 IntList listOfCoordinatesY;
@@ -36,8 +35,8 @@ stroke(100);
 rectMode(CORNER);  
  listOfCoordinatesX = new IntList();
  listOfCoordinatesY = new IntList(); 
-  listOfCoordinatesX.append(0);
-  listOfCoordinatesY.append(0);
+ listOfCoordinatesX.append(0); 
+ listOfCoordinatesY.append(0);
  
  int wideCount = edgeOfCanvas / unit;
   int highCount = edgeOfCanvas / unit;
@@ -56,6 +55,7 @@ void draw() {
   for (Module mod : mods) {
     mod.mouseClick();
      mod.update();
+     mod.knightReturn();
   }
  //      //      //      //
  // Test if the cursor is over the box 
@@ -75,7 +75,10 @@ void draw() {
   rect(buttonX,buttonY,buttonSize,buttonSize);
   if(boolButton && mousePressed) { fill(200);
    rect(buttonX,buttonY,buttonSize,buttonSize); }
+  
   println();
+  println(storX);
+  println(storY);
   println(boolButton);
   println(listOfCoordinatesX);
   println(listOfCoordinatesY);  
@@ -104,6 +107,21 @@ class Module {
    if((bool_mouseReleased ) && (x==storX && y==storY )){
        modColor=200;  }       
   }
+  void knightReturn(){
+    if(boolButton&& mousePressed){
+    if(listOfCoordinatesX.size()!=0){
+   if(int(x)==listOfCoordinatesX.get(listOfCoordinatesX.size()-1) &&  
+    int(y)==listOfCoordinatesY.get(listOfCoordinatesY.size()-1)){ 
+          modColor=30;
+          if(boolButton && mousePressed){
+             storX= listOfCoordinatesX.get(listOfCoordinatesX.size()-1);
+             storY= listOfCoordinatesY.get(listOfCoordinatesY.size()-1);
+                                       }
+             }           
+            }
+           }
+  }
+
  void update() {
   fill(modColor);
   rect(x, y, unitSize, unitSize); 
@@ -113,13 +131,17 @@ class Module {
 void mousePressed() {
   if(overKnight) { 
     locked = true; 
-   //  listOfCoordinatesX.append(int(knightX));
-   //   listOfCoordinatesY.append(int(knightY));    
+     // listOfCoordinatesX.append(int(knightX));
+     // listOfCoordinatesY.append(int(knightY));    
   } else {
     locked = false;
    }
   xOffset = mouseX-knightX; 
   yOffset = mouseY-knightY; 
+  if(boolButton){
+     listOfCoordinatesX.pop();
+      listOfCoordinatesY.pop();
+               }
 }
 void mouseDragged() {
   if(locked) {
@@ -132,23 +154,35 @@ void mouseReleased() {
   bool_mouseReleased=true;
   locked = false;
   if(overKnight){
-    knightX=storX;
-    knightY=storY;
-      listOfCoordinatesX.append(int(knightX));
-      listOfCoordinatesY.append(int(knightY));
+  knightX=storX;
+  knightY=storY;
+  listOfCoordinatesX.append(int(knightX));
+  listOfCoordinatesY.append(int(knightY)); 
                 }
-  if(boolButton){
-   //if list is not emty
-   if(listOfCoordinatesX.size()>0){
+ if(boolButton){
+        knightX=storX;
+        knightY=storY;
+              }                
+ }
+/*
+void mouseReleased() {
+  bool_mouseReleased=true;
+  locked = false;
+  if(!boolButton){
+  knightX=storX;
+  knightY=storY; }
+ else if(boolButton){
+   //if list not emty
+   if(listOfCoordinatesX.size()!=0){
   knightX=listOfCoordinatesX.get(listOfCoordinatesX.size()-1);
   knightY=listOfCoordinatesY.get(listOfCoordinatesY.size()-1);
    /// remove last element of list
-     if(listOfCoordinatesX.size()>1){ //нулевой элемент не удаляем
        listOfCoordinatesX.remove(listOfCoordinatesX.size()-1);
-       listOfCoordinatesY.remove(listOfCoordinatesY.size()-1); }
+       listOfCoordinatesY.remove(listOfCoordinatesY.size()-1);
        }
      }  
 }
+*/
 // button
  void buttonUpdate() {
   if ( overButton(buttonX, buttonY, buttonSize, buttonSize) ) {
