@@ -10,10 +10,12 @@ class Module {
    if (overKnight && mouseIsPressed && (mouseButton == LEFT)) {
      storX=this.x;
       storY=this.y; 
-    if(bool_mouseReleased == true) {this.modColor=200;} 
-       // this.modColor=200;       
+    //if(bool_mouseReleased == true) {this.modColor=200;} 
         } 
       }
+     if( (bool_mouseReleased==true ) && 
+        (this.x==storX && this.y==storY ) ){
+        this.modColor=200;  }
    }
   update() {
    fill(this.modColor);
