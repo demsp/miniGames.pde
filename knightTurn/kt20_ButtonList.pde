@@ -19,6 +19,7 @@ boolean locked = false;
 float xOffset = 0.0; 
 float yOffset = 0.0; 
 int unit = 100; // -> width / unit;
+int unitSize = 100;
 int count;
 
 Module[] mods;
