@@ -95,7 +95,7 @@ class Module {
   //  if(bool_mouseReleased ) {modColor=200;} 
      } 
     }
-   if( (bool_mouseReleased ) && (x==storX && y==storY ) ){
+   if((bool_mouseReleased ) && (x==storX && y==storY )){
        modColor=200;  }       
   }
  void update() {
