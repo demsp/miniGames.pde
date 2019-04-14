@@ -7,8 +7,8 @@ float storY;
 
 float knightX;
 float knightY;
-// size of canvas 600*600
-int edgeOfCanvas=600;
+// size of canvas 500*500
+int edgeOfCanvas=500;
 int knightSize = 100;
 boolean overKnight = false;
 boolean locked = false;
@@ -21,7 +21,7 @@ int count;
 Module[] mods;
 
 void setup() {
-size(600, 600);
+size(500, 500);
  knightX = 0;
   knightY = 0;
   rectMode(CORNER);
