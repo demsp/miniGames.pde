@@ -70,15 +70,17 @@ class Module {
     x = xT;
     y = yT;
   }
-  // Custom method for drawing the object
+  // Custom methods for drawing the object
   void mouseClick() {
    if ((mouseX >= x && mouseX <= x+100 && 
       mouseY >= y && mouseY <= y+100)&& 
     (overKnight && mousePressed && (mouseButton == LEFT))) {
     storX=x;
     storY=y; 
-    if(bool_mouseReleased ){ modColor=200; } 
+   // if(bool_mouseReleased ){ modColor=200; } 
             }        
+ if( (bool_mouseReleased ) && (x==storX && y==storY ) ){
+        modColor=200;  }           
   }
  void update() {
   fill(modColor);
