@@ -7,10 +7,12 @@ int buttonSize = 50;
 boolean boolButton = false;
 //mouse
 boolean bool_mouseReleased;
-// jump to rect center on release
-float storX, storY;
+// jump to rect center on button release
+float storX;
+float storY;
 
-float knightX, knightY;
+float knightX;
+float knightY;
 // size of canvas 
 int edgeOfCanvas=500;
 int knightSize = 100;
@@ -19,20 +21,22 @@ boolean locked = false;
 float xOffset = 0.0; 
 float yOffset = 0.0; 
 int unit = 100; // -> width / unit;
-int unitSize = 100;
+int unitSize=100; 
 int count;
-
+         
 Module[] mods;
 
 void setup() {
+
 size(500, 600);
- stroke(100);
+stroke(100);
   knightX = 0;
   knightY = 0;
-  rectMode(CORNER);
-
+rectMode(CORNER);  
  listOfCoordinatesX = new IntList();
- listOfCoordinatesY = new IntList();
+ listOfCoordinatesY = new IntList(); 
+ listOfCoordinatesX.append(0); 
+ listOfCoordinatesY.append(0);
  
  int wideCount = edgeOfCanvas / unit;
   int highCount = edgeOfCanvas / unit;
@@ -43,16 +47,16 @@ size(500, 600);
     for (int x = 0; x < wideCount; x++) {
       mods[index++] = new Module(x*unit, y*unit);
     }
-  }
+   }
 }
 void draw() {
   background(0);
-buttonUpdate();
-   for (Module mod : mods) {
+   buttonUpdate();
+  for (Module mod : mods) {
     mod.mouseClick();
-     mod.update();
+    mod.update();
   }
- //  //  //  //  //  //
+ //      //      //      //      //      //     
  // Test if the cursor is over the box 
  fill(200);
   if (mouseX > knightX && mouseX < knightX+knightSize && 
@@ -62,15 +66,18 @@ buttonUpdate();
      overKnight = false;  
         }
  fill(200);
-  rect(0,0,100,100);
- 
+ rect(0,0,100,100); 
   rect(knightX, knightY, knightSize, knightSize);
   fill(50);
   ellipse(knightX+50,knightY+50,20,20);
   // draw button
   rect(buttonX,buttonY,buttonSize,buttonSize);
-  
+  if(boolButton && mousePressed) { fill(200);
+   rect(buttonX,buttonY,buttonSize,buttonSize); }
+   
   println();
+  println(storX);
+  println(storY);
   println(boolButton);
   println(listOfCoordinatesX);
   println(listOfCoordinatesY);  
@@ -85,20 +92,20 @@ class Module {
   Module(int xT, int yT){
     x = xT;
     y = yT;
-  }
+  }  
   void mouseClick() {
-       if (mouseX >= x && mouseX <= x+100 && 
+    if (mouseX >= x && mouseX <= x+100 && 
       mouseY >= y && mouseY <= y+100) {
    if (overKnight && mousePressed && (mouseButton == LEFT)) {
     storX=x;
     storY=y; 
-    // if(bool_mouseReleased ) {modColor=200;} 
-            } 
-       }
+  //  if(bool_mouseReleased ) {modColor=200;} 
+     } 
+    }
    if((bool_mouseReleased ) && (x==storX && y==storY )){
-        modColor=200;  }
-  }
- void update() {
+       modColor=200;  }
+}
+void update() {
   fill(modColor);
   rect(x, y, unitSize, unitSize); 
    }
@@ -106,12 +113,10 @@ class Module {
 
 void mousePressed() {
   if(overKnight) { 
-    locked = true; 
-    listOfCoordinatesX.append(int(knightX));
-    listOfCoordinatesY.append(int(knightY)); 
-    } else {
+    locked = true;    
+  } else {
     locked = false;
-  }
+   }
   xOffset = mouseX-knightX; 
   yOffset = mouseY-knightY; 
 }
@@ -125,9 +130,13 @@ void mouseDragged() {
 void mouseReleased() {
   bool_mouseReleased=true;
   locked = false;
+  if(overKnight){
   knightX=storX;
   knightY=storY;
-}
+      listOfCoordinatesX.append(int(knightX));
+      listOfCoordinatesY.append(int(knightY)); 
+                }
+ }
 // button
  void buttonUpdate() {
   if ( overButton(buttonX, buttonY, buttonSize, buttonSize) ) {
@@ -143,4 +152,4 @@ boolean overButton(int x, int y, int width, int height)  {
   } else {
     return false;
   }
-}
+} 
