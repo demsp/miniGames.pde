@@ -1,3 +1,5 @@
+boolean rightTurn;
+
 // list
 int[] listOfCoordinatesX;
 int[] listOfCoordinatesY;
@@ -104,7 +106,11 @@ class Module {
      } 
     }
    if((bool_mouseReleased ) && (x==storX && y==storY )){
-       modColor=200;  }       
+    // if((bool_mouseReleased ) ){ закрашивает всё поле
+    // if(rightTurn) {  закрашивает при отжатии
+     modColor=200; 
+             //     } 
+     }       
    if(boolButton && mousePressed){   
              storX= listOfCoordinatesX[listOfCoordinatesX.length-1];
              storY= listOfCoordinatesY[listOfCoordinatesY.length-1];              
@@ -135,6 +141,7 @@ void mousePressed() {
       }
  }
 void mouseDragged() {
+  rightTurn=false;
   if(locked) {
     bool_mouseReleased=false;
     knightX = mouseX-xOffset; 
@@ -162,6 +169,7 @@ void mouseReleased() {
         (storX==listOfCoordinatesX[listOfCoordinatesY.length-1]+100  
        || storX==listOfCoordinatesX[listOfCoordinatesY.length-1]-100))
 ){ 
+  rightTurn=true;
   knightX=storX;
   knightY=storY;
   listOfCoordinatesX=append(listOfCoordinatesX,int(knightX));
