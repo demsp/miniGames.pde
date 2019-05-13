@@ -1,3 +1,4 @@
+boolean overField;
 // list
 IntList listOfCoordinatesX;
 IntList listOfCoordinatesY;
@@ -75,6 +76,13 @@ void draw() {
    println(listOfCoordinatesX);
    println(listOfCoordinatesY);
    println();
+   
+    for (int i =0; i <listOfCoordinatesX.size()-1;i++)
+    { 
+     if ( storX==listOfCoordinatesX.get(i) && storY==listOfCoordinatesY.get(i) )
+      { overField=true; }
+    }
+  println("overField",overField);  
  }
 
 class Module {
