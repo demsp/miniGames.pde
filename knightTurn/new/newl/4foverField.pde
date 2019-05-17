@@ -1,13 +1,13 @@
-boolean overField;
+boolean rightTurn;
+
 // list
-IntList listOfCoordinatesX;
-IntList listOfCoordinatesY;
+int[] listOfCoordinatesX;
+int[] listOfCoordinatesY;
+ 
 //button
 int buttonX=25, buttonY=525; 
 int buttonSize = 50;     
 boolean boolButton = false;
-//  добавляем переменую для закрашивания 
-boolean rightCell = false;
 //mouse
 boolean bool_mouseReleased;
 // jump to rect center on button release
@@ -33,13 +33,13 @@ void setup() {
 
 size(500, 600);
 stroke(100);
+  listOfCoordinatesX = new int[0];
+  listOfCoordinatesY = new int[0]; 
+   listOfCoordinatesX = append(listOfCoordinatesX,0);
+   listOfCoordinatesY = append(listOfCoordinatesY,0);
   knightX = 0;
   knightY = 0;
 rectMode(CORNER);  
- listOfCoordinatesX = new IntList();
- listOfCoordinatesY = new IntList(); 
- listOfCoordinatesX.append(0); 
- listOfCoordinatesY.append(0);
  
  int wideCount = edgeOfCanvas / unit;
   int highCount = edgeOfCanvas / unit;
@@ -77,20 +77,13 @@ void draw() {
   rect(buttonX,buttonY,buttonSize,buttonSize);
   if(boolButton && mousePressed) { fill(200);
    rect(buttonX,buttonY,buttonSize,buttonSize); }   
-  //println();
-  println(storX);
-  println(storY);
-  //println(boolButton);
-  println(listOfCoordinatesX);
-  println(listOfCoordinatesY);
-  
-  for (int i =0; i <listOfCoordinatesX.size()-1;i++)
-    { 
-     if ( storX==listOfCoordinatesX.get(i) && storY==listOfCoordinatesY.get(i) )
-      { overField=true; }
-    }
-println("overField",overField); 
- }
+// println();
+// println(storX);
+// println(storY);
+//  println(boolButton);
+//  println(listOfCoordinatesX);
+//  println(listOfCoordinatesY);
+  }
 
 
 class Module {
@@ -101,22 +94,31 @@ class Module {
   Module(int xT, int yT){
     x = xT;
     y = yT;
-  }  
+  }
+  
   void mouseClick() {
     if (mouseX >= x && mouseX <= x+100 && 
       mouseY >= y && mouseY <= y+100) {
    if (overKnight && mousePressed && (mouseButton == LEFT)) {
     storX=x;
     storY=y; 
- /* 
-   if((x==200 && y== 100) || (y==200 && x== 100)){ // правильный ход
-        storX=x;
-        storY=y; }  */ 
+  //  if(bool_mouseReleased ) {modColor=200;} // закрашивает при mousePressed
      } 
     }
- if(bool_mouseReleased && rightCell && x==storX && y==storY){
-     modColor=200;  }
-}
+   if((bool_mouseReleased ) && (x==storX && y==storY )){
+    // if((bool_mouseReleased ) ){ закрашивает всё поле
+    // if(rightTurn) {  закрашивает при отжатии
+     modColor=200; 
+             //     } 
+     }       
+   if(boolButton && mousePressed){   
+             storX= listOfCoordinatesX[listOfCoordinatesX.length-1];
+             storY= listOfCoordinatesY[listOfCoordinatesY.length-1];              
+             } 
+  if(boolButton && bool_mouseReleased){       
+    if(x==storX && y==storY ){
+       modColor=0;  }  }      
+  }
 void update() {
   fill(modColor);
   rect(x, y, unitSize, unitSize); 
@@ -125,16 +127,21 @@ void update() {
 
 void mousePressed() {
   if(overKnight) { 
-    locked = true;    
+    locked = true;      
   } else {
     locked = false;
    }
   xOffset = mouseX-knightX; 
   yOffset = mouseY-knightY; 
-}
+  if(boolButton && listOfCoordinatesX.length>1){
+   // listOfCoordinatesX.pop();
+   //  listOfCoordinatesY.pop();
+    listOfCoordinatesX=shorten(listOfCoordinatesX);
+    listOfCoordinatesY=shorten(listOfCoordinatesY);
+      }
+ }
 void mouseDragged() {
-  overField=false;
-  rightCell=false;
+  rightTurn=false;
   if(locked) {
     bool_mouseReleased=false;
     knightX = mouseX-xOffset; 
@@ -145,41 +152,39 @@ void mouseReleased() {
   bool_mouseReleased=true;
   locked = false;
   if(overKnight)
- {
- 
-   if(overField)
-     {
-      knightX=listOfCoordinatesX.get(listOfCoordinatesX.size()-1);
-      knightY=listOfCoordinatesY.get(listOfCoordinatesY.size()-1);
-      }
-  else 
- if( (storX==listOfCoordinatesX.get(listOfCoordinatesX.size()-1)+200 && 
-        (storY==listOfCoordinatesY.get(listOfCoordinatesY.size()-1) +100  
-       || storY==listOfCoordinatesY.get(listOfCoordinatesY.size()-1) -100))
+  {
+     if( (storX==listOfCoordinatesX[listOfCoordinatesX.length-1]+200 && 
+        (storY==listOfCoordinatesY[listOfCoordinatesY.length-1] +100  
+       || storY==listOfCoordinatesY[listOfCoordinatesY.length-1] -100))
    ||
-    (storX==listOfCoordinatesX.get(listOfCoordinatesX.size()-1)-200 && 
-        (storY==listOfCoordinatesY.get(listOfCoordinatesY.size()-1)+100  
-       || storY==listOfCoordinatesY.get(listOfCoordinatesY.size()-1)-100))
+    (storX==listOfCoordinatesX[listOfCoordinatesX.length-1]-200 && 
+        (storY==listOfCoordinatesY[listOfCoordinatesY.length-1]+100  
+       || storY==listOfCoordinatesY[listOfCoordinatesY.length-1]-100))
    || 
-   (storY==listOfCoordinatesY.get(listOfCoordinatesX.size()-1)+200 && 
-        (storX==listOfCoordinatesX.get(listOfCoordinatesY.size()-1)+100  
-       || storX==listOfCoordinatesX.get(listOfCoordinatesY.size()-1)-100))
+   (storY==listOfCoordinatesY[listOfCoordinatesX.length-1]+200 && 
+        (storX==listOfCoordinatesX[listOfCoordinatesY.length-1]+100  
+       || storX==listOfCoordinatesX[listOfCoordinatesY.length-1]-100))
    ||
-   (storY==listOfCoordinatesY.get(listOfCoordinatesX.size()-1)-200 && 
-        (storX==listOfCoordinatesX.get(listOfCoordinatesY.size()-1)+100  
-|| storX==listOfCoordinatesX.get(listOfCoordinatesY.size()-1)-100)) )
-   {  
-  rightCell=true;   
+   (storY==listOfCoordinatesY[listOfCoordinatesX.length-1]-200 && 
+        (storX==listOfCoordinatesX[listOfCoordinatesY.length-1]+100  
+       || storX==listOfCoordinatesX[listOfCoordinatesY.length-1]-100))
+){ 
+  rightTurn=true;
   knightX=storX;
   knightY=storY;
-      listOfCoordinatesX.append(int(knightX));
-      listOfCoordinatesY.append(int(knightY)); 
-    } else
-    {
-    knightX=listOfCoordinatesX.get(listOfCoordinatesX.size()-1);
-    knightY=listOfCoordinatesY.get(listOfCoordinatesY.size()-1);
-    }
-  }             
+  listOfCoordinatesX=append(listOfCoordinatesX,int(knightX));
+  listOfCoordinatesY=append(listOfCoordinatesY,int(knightY)); 
+ }
+ else {
+        knightX=listOfCoordinatesX[listOfCoordinatesX.length-1];
+         knightY=listOfCoordinatesY[listOfCoordinatesY.length-1];
+       }
+}
+ 
+ if(boolButton){
+        knightX=storX;
+        knightY=storY;
+              }                
  }
 // button
  void buttonUpdate() {
@@ -196,4 +201,4 @@ boolean overButton(int x, int y, int width, int height)  {
   } else {
     return false;
   }
-}   
+} 
