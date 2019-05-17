@@ -1,3 +1,4 @@
+boolean rightCell = false;
 // list
 IntList listOfCoordinatesX;
 IntList listOfCoordinatesY;
@@ -6,7 +7,6 @@ int buttonX=25, buttonY=525;
 int buttonSize = 50;     
 boolean boolButton = false;
 //  добавляем переменую для закрашивания 
-boolean rightCell = false;
 //mouse
 boolean bool_mouseReleased;
 // jump to rect center on button release
