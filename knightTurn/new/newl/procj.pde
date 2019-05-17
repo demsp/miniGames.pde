@@ -1,3 +1,5 @@
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray
+
 // https://funprogramming.org/142-Processing-js-with-sound-audio-II.html
 //  добавляем переменую для закрашивания 
 boolean rightCell = false;
