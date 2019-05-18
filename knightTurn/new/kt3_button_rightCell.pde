@@ -165,6 +165,8 @@ void mouseReleased() {
      {
       knightX=listOfCoordinatesX[listOfCoordinatesX.length-1];
       knightY=listOfCoordinatesY[listOfCoordinatesY.length-1];
+      storX=knightX;
+      storY=knightY; 
       }
      else   
      if(storX==listOfCoordinatesX[listOfCoordinatesX.length-1]+100 &&
