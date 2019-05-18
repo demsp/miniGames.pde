@@ -79,8 +79,8 @@ void draw() {
   if(boolButton && mousePressed) { fill(200);
    rect(buttonX,buttonY,buttonSize,buttonSize); }   
   println();
-  //println(storX);
-  //println(storY);
+  println(storX);
+  println(storY);
   //println(boolButton);
   println(listOfCoordinatesX);
   println(listOfCoordinatesY);  
@@ -90,6 +90,7 @@ void draw() {
       { overField=true; }
     }
  println(overField);
+  
 }
 
 
@@ -171,7 +172,13 @@ void mouseReleased() {
        storY==listOfCoordinatesY[listOfCoordinatesY.length-1]-200) ||
        storX==listOfCoordinatesX[listOfCoordinatesX.length-1]-100 &&
        (storY==listOfCoordinatesY[listOfCoordinatesY.length-1]+200 ||
-       storY==listOfCoordinatesY[listOfCoordinatesY.length-1]-200)
+       storY==listOfCoordinatesY[listOfCoordinatesY.length-1]-200) ||
+       storX==listOfCoordinatesX[listOfCoordinatesX.length-1]+200 &&
+       (storY==listOfCoordinatesY[listOfCoordinatesY.length-1]+100 ||
+       storY==listOfCoordinatesY[listOfCoordinatesY.length-1]-100) ||
+       storX==listOfCoordinatesX[listOfCoordinatesX.length-1]-200 &&
+       (storY==listOfCoordinatesY[listOfCoordinatesY.length-1]+100 ||
+       storY==listOfCoordinatesY[listOfCoordinatesY.length-1]-100) 
        )
     {
     rightCell = true;  
@@ -184,6 +191,8 @@ void mouseReleased() {
     {
     knightX=listOfCoordinatesX[listOfCoordinatesX.length-1];
     knightY=listOfCoordinatesY[listOfCoordinatesY.length-1];  
+    storX=knightX;
+    storY=knightY;  
     }
   }
   // button
