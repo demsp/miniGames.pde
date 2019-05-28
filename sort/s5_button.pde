@@ -71,8 +71,6 @@ class Module {
  int x;
   int rectHight;
   int xDirection = 1;
- // float speed;
-// int speed;
   
 // Contructor
  // Module(int xOffsetTemp, int yOffsetTemp, int xTemp, int yTemp, float speedTemp, int tempUnit) {
