@@ -15,11 +15,11 @@ void setup() {
     */
     
   //mods[0] = new Module(x*40,  20,  random(0.05, 0.8));
-  mods[0] = new Module(0,  20,  int(random(0, 5)), 10);
-  mods[1] = new Module(40,  20,  int(random(0, 5)), 20);
-  mods[2] = new Module(80,  20,  int(random(0, 5)), 70);
-  mods[3] = new Module(120,  20,  int(random(0, 5)), 40);
-  mods[4] = new Module(160,  20,  int(random(0, 5)), 50);
+  mods[0] = new Module(0, 20, int(random(0, 5)), 10);
+  mods[1] = new Module(40, 20, int(random(0, 5)), 20);
+  mods[2] = new Module(80, 20, int(random(0, 5)), 30);
+  mods[3] = new Module(120, 20, int(random(0, 5)), 40);
+  mods[4] = new Module(160, 20, int(random(0, 5)), 50);
   }
 
 void draw() {
