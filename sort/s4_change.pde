@@ -35,7 +35,7 @@ void draw() {
   for (int i = 1; i < 5; i = i+1) 
   {
   if(mods[i].rectHight > mods[i-1].rectHight)
-  println(i);
+  // println(i);
    {
    vTemp= mods[i-1].xOffset;
    mods[i-1].xOffset=mods[i].xOffset;
