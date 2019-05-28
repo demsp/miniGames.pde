@@ -1,3 +1,4 @@
+// inc
 int inc=1;
 //button
 int buttonX=25, buttonY=525; 
@@ -21,16 +22,16 @@ void setup() {
     */
     
   //mods[0] = new Module(x*40,  20,  random(0.05, 0.8));
-  mods[0] = new Module(0, 20, int(random(0, 5)), 10);
-  mods[1] = new Module(40, 20, int(random(0, 5)), 20);
-  mods[2] = new Module(80, 20, int(random(0, 5)), 30);
-  mods[3] = new Module(120, 20, int(random(0, 5)), 40);
-  mods[4] = new Module(160, 20, int(random(0, 5)), 50);
+  mods[0] = new Module(0, 20,  10);
+  mods[1] = new Module(40, 20,  20);
+  mods[2] = new Module(80, 20,  60);
+  mods[3] = new Module(120, 20, 30);
+  mods[4] = new Module(160, 20,  40);
   }
 
 void draw() {
-  frameRate(1);
-  background(50);
+  frameRate(5);
+  background(30);
      buttonUpdate();
   
   for (Module mod : mods) {
@@ -50,7 +51,7 @@ void draw() {
      mods[inc].xOffset=vTemp;
     }
   //}
-   draw button
+  // draw button
   fill(50);
   rect(buttonX,buttonY,buttonSize,buttonSize);
    if(boolButton && mousePressed)
@@ -60,6 +61,7 @@ void draw() {
     rect(buttonX,buttonY,buttonSize,buttonSize);
    }
 println(boolButton); 
+println(inc);
 }
 
 
@@ -70,25 +72,27 @@ class Module {
   int rectHight;
   int xDirection = 1;
  // float speed;
- int speed;
+// int speed;
   
 // Contructor
  // Module(int xOffsetTemp, int yOffsetTemp, int xTemp, int yTemp, float speedTemp, int tempUnit) {
  //Module(int xOffsetTemp, int xTemp, float speedTemp, int tempUnit) {
-   Module(int xOffsetTemp, int xTemp, int speedTemp, int rectHightTemp) {
+   Module(int xOffsetTemp, int xTemp, int rectHightTemp) {
     xOffset = xOffsetTemp;
      x = xTemp;   
-    speed = speedTemp;
+    //speed = speedTemp;
     //unit = tempUnit;
     rectHight=rectHightTemp;
   }  
   // Custom method for updating the variables
   void update() {
+    /*
     x = x + (speed * xDirection);
     if (x >= 40 || x <= 0) {
       xDirection *= -1;
       x = x + (1 * xDirection);      
-    }   
+    }
+    */
   }  
   // Custom method for drawing the object
   void display() {
