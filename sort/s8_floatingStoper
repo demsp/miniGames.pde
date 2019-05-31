@@ -85,6 +85,8 @@ void mouseReleased() {
     incPaddle=1;
     floatingStoper--;
     if(floatingStoper<1) floatingStoper=1; 
+    // в правой половине получаем отсортированный массив
+    //if(floatingStoper<moduleSize/2+1) floatingStoper=1; 
 }
   }   
  }
