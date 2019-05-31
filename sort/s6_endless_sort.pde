@@ -1,8 +1,10 @@
+int moduleSize=5;
  int vTemp;
 // inc
 int inc=1;
+
 //button
-int buttonX=25, buttonY=525; 
+int buttonX=25, buttonY=325; 
 int buttonSize = 50;     
 boolean boolButton = false;
 
@@ -11,49 +13,24 @@ int count;
 Module[] mods;
 
 void setup() {
-  size(500, 600);
-  noStroke(); 
-  mods = new Module[5];
+ size(400, 400);
+//  noStroke(); 
+ mods = new Module[moduleSize];
 
-//  int index = 0;
-  /*
-    for (int x = 0; x < 5; x++) {
-     mods[index++] = new Module(x*unit,  20,  random(0.05, 0.8));
-    }
-    */
-    
-  //mods[0] = new Module(x*40,  20,  random(0.05, 0.8));
-  mods[0] = new Module(0, 20,  10);
-  mods[1] = new Module(40, 20,  20);
-  mods[2] = new Module(80, 20,  60);
-  mods[3] = new Module(120, 20, 30);
-  mods[4] = new Module(160, 20,  40);
+ mods[0] = new Module(1*30,  100);
+ mods[1] = new Module(2*30,  50);
+ mods[2] = new Module(3*30,  30);
+ mods[3] = new Module(4*30,  60);
+ mods[4] = new Module(5*30,  20);
   }
 
 void draw() {
-  frameRate(5);
+//  frameRate(5);
   background(30);
      buttonUpdate();
   
-  for (Module mod : mods) {
-    mod.update();
-    mod.display();
-   // if (mod.rectHight>50){    println(mod.rectHight);  }
-    
-  }
+  for (Module mod : mods){ mod.display();  }
  
-  //for (int i = 1; i < 5; i = i+1) 
-  //{
-  /*
-  if(inc>4){inc=4;} 
-  if(mods[inc].rectHight < mods[inc-1].rectHight)  
-    {
-     vTemp= mods[inc-1].xOffset;
-     mods[inc-1].xOffset=mods[inc].xOffset;
-     mods[inc].xOffset=vTemp;
-    }
- */   
-  //}
   // draw button
   fill(50);
   rect(buttonX,buttonY,buttonSize,buttonSize);
@@ -71,56 +48,38 @@ void draw() {
 class Module {
   int xOffset;
  // float x;
- int x;
+ //int x;
   int rectHight;
   int xDirection = 1;
- // float speed;
-// int speed;
   
-// Contructor
- // Module(int xOffsetTemp, int yOffsetTemp, int xTemp, int yTemp, float speedTemp, int tempUnit) {
- //Module(int xOffsetTemp, int xTemp, float speedTemp, int tempUnit) {
-   Module(int xOffsetTemp, int xTemp, int rectHightTemp) {
-    xOffset = xOffsetTemp;
-     x = xTemp;   
-    //speed = speedTemp;
-    //unit = tempUnit;
+// Contructor 
+   Module(int xOffsetTemp, int rectHightTemp) {  
+    xOffset = xOffsetTemp;  
     rectHight=rectHightTemp;
   }  
-  // Custom method for updating the variables
-  void update() {
-    /*
-    x = x + (speed * xDirection);
-    if (x >= 40 || x <= 0) {
-      xDirection *= -1;
-      x = x + (1 * xDirection);      
-    }
-    */
-  }  
+  
+ // void update() {  }  
+  
   // Custom method for drawing the object
   void display() {
     fill(255);
-    // ellipse(xOffset + x, 100, 6, 6);
-      //rect(xOffset + x, 100, 6, rectHight);
-      rect(xOffset , 100, 6, rectHight);
+   rect(xOffset , 100, 20, rectHight);
   }
 }
 
 // button
 void mousePressed() { 
-//bool_mouseReleased=false;
 if(inc>4){inc=1;} 
    print(inc);
    println();
    print(mods[inc-1].rectHight);
-     println();
-     print(mods[inc].rectHight);
-     println();
-     println();
+   println();
+   print(mods[inc].rectHight);
+   println();
+   println();
  }
  void mouseReleased() {
-  
-  if(mods[inc].rectHight > mods[inc-1].rectHight)  
+ if(mods[inc].rectHight < mods[inc-1].rectHight)  
     {     
      vTemp= mods[inc-1].rectHight;
      mods[inc-1].rectHight=mods[inc].rectHight;
