@@ -1,13 +1,13 @@
-// paddle
-int IpaddleX= 30;
-int incIPaddle=1;
-int JpaddleX= 30;
-int incJPaddle=1;
+int moduleSize = 10;
+// floatingStoper
+int floatingStoper = 1;
 
-int classSize=10;
+// paddle
+//int paddleX= 30;
+int incPaddle=1;
+
  int vTemp;
-// inc
-int inc=1;
+
 //button
 int buttonX=25, buttonY=325; 
 int buttonSize = 50;     
@@ -19,9 +19,8 @@ Module[] mods;
 
 void setup() {
   size(400, 400);
- // noStroke(); 
-  mods = new Module[classSize];
- mods[0] = new Module(1*30,  100);
+  mods = new Module[moduleSize];
+  mods[0] = new Module(1*30,  100);
  mods[1] = new Module(2*30,  50);
  mods[2] = new Module(3*30,  30);
  mods[3] = new Module(4*30,  60);
@@ -31,89 +30,80 @@ void setup() {
  mods[7] = new Module(8*30,  70);
  mods[8] = new Module(9*30,  90);
  mods[9] = new Module(10*30, 10);  
- }
+  }
 
 void draw() { 
-  background(10);
+  background(50);
      buttonUpdate();  
-  for (Module mod : mods) {
- //   mod.update();
-    mod.display();       
-  }
+  for (Module mod : mods) {  mod.display();  }
   
-   // paddles
-  rect (IpaddleX, 85, 20, 5);
-  IpaddleX = incIPaddle*30;
-  rect (JpaddleX, 75, 20, 5);
-  JpaddleX = incJPaddle*30;
+   // paddle
+  rect (incPaddle*30, 85, 20, 5);
   
+  //floatingStoper
+  rect (floatingStoper*30, 75, 20, 5);
   // draw button
-  fill(50);
+  fill(150);
   rect(buttonX,buttonY,buttonSize,buttonSize);
    if(boolButton && mousePressed)  
   { 
     fill(200);
     rect(buttonX,buttonY,buttonSize,buttonSize);
-   }
- 
+   } 
 //println(boolButton); 
 //println(inc);
 }
 
 
 class Module {
- int xOffset;
- // int x;
+ int xOffset; 
   int rectHight;
   
 // Contructor
    Module(int xOffsetTemp, int rectHightTemp) {
-    xOffset = xOffsetTemp;   
+    xOffset = xOffsetTemp;  
     rectHight=rectHightTemp;
-  }  
-  // Custom method for updating the variables
-  void update() {
-    /*
-    x = x + (speed * xDirection);
-    if (x >= 40 || x <= 0) {
-      xDirection *= -1;
-      x = x + (1 * xDirection);      
-    }
-    */
-  }  
+  }   
+  //void update() {  }  
+ 
   // Custom method for drawing the object
   void display() {
-    fill(255);    
-      rect(xOffset , 100, 20, rectHight);
-  }
+    fill(255);
+     rect(xOffset , 100, 20, rectHight);
+   }
 }
 
 // button
-void mousePressed() {
+void mouseReleased() {
+//void mousePressed() { 
  if(boolButton)
- {
-  if(inc>classSize-1) inc=1;
-  
-  if(incJPaddle>classSize-1) incJPaddle=incIPaddle;
-   incJPaddle++;
-     
-  //if(incIPaddle>classSize-1) incIPaddle=classSize-1;
-  if(incJPaddle>classSize-1) incIPaddle++;
-  if(incIPaddle>classSize-1) incIPaddle=classSize-1;
- } 
-}
- void mouseReleased() {
+  {
+   incPaddle++;
+   if(incPaddle>=moduleSize) 
+   { 
+    incPaddle=1;
+    floatingStoper++;     
+   }
+   if(floatingStoper>=moduleSize) floatingStoper=moduleSize;
+   if(floatingStoper==moduleSize) incPaddle=moduleSize-1;
+  }   
+ }
+ 
+ void mousePressed() {
+ //void mouseReleased() {
  if(boolButton)
- { 
-  if(mods[inc].rectHight < mods[inc-1].rectHight)  
+ {  
+  if(mods[incPaddle].rectHight < mods[incPaddle-1].rectHight)  
     {     
-     vTemp= mods[inc-1].rectHight;
-     mods[inc-1].rectHight=mods[inc].rectHight;
-     mods[inc].rectHight=vTemp;
+     vTemp= mods[incPaddle-1].rectHight;
+     mods[incPaddle-1].rectHight=mods[incPaddle].rectHight;
+     mods[incPaddle].rectHight=vTemp;
     }
-    inc++;
-   // paddleX=paddleX+40;
- }   
+  }
+   //print(incPaddle-1);
+   //print(" ");
+   //print(incPaddle);
+   //println();
 }
 
  void buttonUpdate() {
