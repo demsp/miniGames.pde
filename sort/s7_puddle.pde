@@ -1,12 +1,12 @@
+int moduleSize = 6;
 // paddle
 int paddleX= 30;
 int incPaddle=1;
 
  int vTemp;
-// inc
-int inc=1;
+
 //button
-int buttonX=25, buttonY=525; 
+int buttonX=25, buttonY=325; 
 int buttonSize = 50;     
 boolean boolButton = false;
 
@@ -15,29 +15,20 @@ int count;
 Module[] mods;
 
 void setup() {
-  size(500, 600);
- // noStroke(); 
-  mods = new Module[6];
-//  mods = new Module[5];
-
-
-  mods[0] = new Module(30,  10);
-  mods[1] = new Module(60,   50);
-  mods[2] = new Module(90,   20);
-  mods[3] = new Module(120, 60);
-  mods[4] = new Module(150, 30);
-  mods[5] = new Module(180,  40);
+  size(400, 400);
+  mods = new Module[moduleSize];
+   mods[0] = new Module(1*30,  100);
+   mods[1] = new Module(2*30,  50);
+   mods[2] = new Module(3*30,  30);
+   mods[3] = new Module(4*30,  60);
+   mods[4] = new Module(5*30,  20);
+   mods[5] = new Module(6*30,  40);
   }
 
-void draw() {
-  frameRate(500);
-  background(30);
+void draw() { 
+  background(10);
      buttonUpdate();  
-  for (Module mod : mods) {
- //   mod.update();
-    mod.display();
-   // if (mod.rectHight>50){    println(mod.rectHight);  }    
-  }
+  for (Module mod : mods) {  mod.display();  }
   
    // paddle
   rect (paddleX, 85, 20, 5);
@@ -49,83 +40,56 @@ void draw() {
   { 
     fill(200);
     rect(buttonX,buttonY,buttonSize,buttonSize);
-   }
-   
- 
+   } 
 //println(boolButton); 
 //println(inc);
 }
 
 
 class Module {
- int xOffset;
- // int x;
+ int xOffset; 
   int rectHight;
   
 // Contructor
    Module(int xOffsetTemp, int rectHightTemp) {
-    xOffset = xOffsetTemp;
-   //  x = xTemp;   
-    //speed = speedTemp;
-    //unit = tempUnit;
+    xOffset = xOffsetTemp;  
     rectHight=rectHightTemp;
   }  
-  // Custom method for updating the variables
-  void update() {
-    /*
-    x = x + (speed * xDirection);
-    if (x >= 40 || x <= 0) {
-      xDirection *= -1;
-      x = x + (1 * xDirection);      
-    }
-    */
-  }  
+  
+  //void update() {  }  
+ 
   // Custom method for drawing the object
   void display() {
     fill(255);
-    // ellipse(xOffset + x, 100, 6, 6);
-      //rect(xOffset + x, 100, 6, rectHight);
-      rect(xOffset , 100, 20, rectHight);
-  }
+     rect(xOffset , 100, 20, rectHight);
+   }
 }
 
 // button
-void mousePressed() { 
-//bool_mouseReleased=false;
+void mouseReleased() {
+//void mousePressed() { 
+ if(boolButton)
+  {
+   incPaddle++;
+  }   
+ }
+ 
+ void mousePressed() {
+ //void mouseReleased() {
  if(boolButton)
  {
-  if(inc>5) inc=1;
-  if(incPaddle>5) incPaddle=1;
-   incPaddle++;
- }
- /*
-if(boolButton)
- {if(paddleX>200)
-  {
-    paddleX=30;
-  }
- }
- */
-   print(inc);
-   println();
-   print(mods[inc-1].rectHight);
-     println();
-     print(mods[inc].rectHight);
-     println();
-     println();
- }
- void mouseReleased() {
- if(boolButton)
- { 
-  if(mods[inc].rectHight < mods[inc-1].rectHight)  
+ if(incPaddle>5) incPaddle=1;  
+  if(mods[incPaddle].rectHight < mods[incPaddle-1].rectHight)  
     {     
-     vTemp= mods[inc-1].rectHight;
-     mods[inc-1].rectHight=mods[inc].rectHight;
-     mods[inc].rectHight=vTemp;
+     vTemp= mods[incPaddle-1].rectHight;
+     mods[incPaddle-1].rectHight=mods[incPaddle].rectHight;
+     mods[incPaddle].rectHight=vTemp;
     }
-    inc++;
-   // paddleX=paddleX+40;
- }   
+  }
+  print(incPaddle-1);
+   print(" ");
+   print(incPaddle);
+   println();
 }
 
  void buttonUpdate() {
