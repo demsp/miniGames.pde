@@ -93,23 +93,15 @@ void mousePressed() {
  if(boolButton)
  {
   if(inc>classSize-1) inc=1;
-  if(incIPaddle>classSize-1) incIPaddle=1;
-   incIPaddle++;
-   
-    if(inc>classSize-1) inc=1;
-  if(incJPaddle>classSize-1) incJPaddle=1;
+  
+  if(incJPaddle>classSize-1) incJPaddle=incIPaddle;
    incJPaddle++;
- }
- /*
-   print(inc);
-   println();
-   print(mods[inc-1].rectHight);
-     println();
-     print(mods[inc].rectHight);
-     println();
-     println();
-  */
- }
+     
+  //if(incIPaddle>classSize-1) incIPaddle=classSize-1;
+  if(incJPaddle>classSize-1) incIPaddle++;
+  if(incIPaddle>classSize-1) incIPaddle=classSize-1;
+ } 
+}
  void mouseReleased() {
  if(boolButton)
  { 
