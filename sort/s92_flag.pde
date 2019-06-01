@@ -55,6 +55,9 @@ void draw() {
 //println(boolButton); 
 //println(inc);
 println(flag);
+println(floatingStoper);
+println(floatingStoper+1);
+println();
 }
 
 
@@ -82,13 +85,11 @@ void mouseReleased() {
 //void mousePressed() { 
  if(boolButton)
   {
-   
-  
-   if(flag){
-   floatingStoper--;
+  if(flag){
+   floatingStoper++;
    }
-   if(floatingStoper==1)
-   {flag=false;}
+   //if(floatingStoper<=1)   {flag=false;}
+   
   // if(floatingStoper>=moduleSize) floatingStoper=moduleSize;
   // if(floatingStoper==moduleSize) incPaddle=moduleSize-1;
   
@@ -99,30 +100,31 @@ void mouseReleased() {
  //void mouseReleased() {
  if(boolButton)
  {
-   if(incPaddle==floatingStoper) 
-   {
-    incPaddle++; 
-    floatingStoper++;
-    flag=true; 
-   } 
-   if(incPaddle!=floatingStoper && flag==false)
+   if(incPaddle==floatingStoper && flag==false)
    {
    incPaddle++;
-   floatingStoper=incPaddle;
    flag=true;
+   }
+   if(incPaddle!=floatingStoper) { flag=true;  } 
+   if(incPaddle==floatingStoper && flag==true)
+   {
+   incPaddle++;
+   floatingStoper=1;
+   flag=false;
      
    }
-   if(incPaddle>=moduleSize) incPaddle=moduleSize;
-   if(floatingStoper>=moduleSize) floatingStoper=moduleSize;
-  /* 
-  if(mods[incPaddle].rectHight < mods[incPaddle-1].rectHight)  
+  // if(incPaddle>=moduleSize) incPaddle=moduleSize;
+  // if(floatingStoper>=moduleSize) floatingStoper=moduleSize;
+  /*
+       if(mods[floatingStoper].rectHight > mods[floatingStoper+1].rectHight)  
     {     
-     vTemp= mods[incPaddle-1].rectHight;
-     mods[incPaddle-1].rectHight=mods[incPaddle].rectHight;
-     mods[incPaddle].rectHight=vTemp;
+     vTemp= mods[floatingStoper-1].rectHight;
+     mods[floatingStoper-1].rectHight=mods[floatingStoper].rectHight;
+     mods[floatingStoper].rectHight=vTemp;
     }
-    */
-  }
+   
+ */  
+ }
   //print(incPaddle-1);
   // print(" ");
   // print(incPaddle);
