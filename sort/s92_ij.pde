@@ -1,5 +1,4 @@
-boolean flag;
-
+int counter;
 int moduleSize = 10;
 // floatingStoper
 int floatingStoper = 1;
@@ -22,7 +21,7 @@ Module[] mods;
 void setup() {
   size(400, 400);
   mods = new Module[moduleSize];
- mods[0] = new Module(1*30,  100);
+  mods[0] = new Module(1*30,  100);
  mods[1] = new Module(2*30,  50);
  mods[2] = new Module(3*30,  30);
  mods[3] = new Module(4*30,  60);
@@ -41,9 +40,12 @@ void draw() {
   
    // paddle
   rect (incPaddle*30, 85, 20, 5);
-
+  
   //floatingStoper
   rect (floatingStoper*30, 75, 20, 5);
+  // draw counter
+  textSize(25);
+  text(counter,300,300);
   // draw button
   fill(150);
   rect(buttonX,buttonY,buttonSize,buttonSize);
@@ -54,10 +56,6 @@ void draw() {
    } 
 //println(boolButton); 
 //println(inc);
-println(flag);
-println(floatingStoper);
-println(floatingStoper+1);
-println();
 }
 
 
@@ -69,8 +67,7 @@ class Module {
    Module(int xOffsetTemp, int rectHightTemp) {
     xOffset = xOffsetTemp;  
     rectHight=rectHightTemp;
-  }  
-  
+  }   
   //void update() {  }  
  
   // Custom method for drawing the object
@@ -85,50 +82,36 @@ void mouseReleased() {
 //void mousePressed() { 
  if(boolButton)
   {
-  if(flag){
-   floatingStoper++;
+ if (floatingStoper==incPaddle) {incPaddle++;floatingStoper=1;} 
+
+   //incPaddle++;
+   if(incPaddle>=moduleSize) 
+   { 
+    incPaddle=10;
+    if(floatingStoper>=10)floatingStoper=1;     
    }
-   //if(floatingStoper<=1)   {flag=false;}
-   
-  // if(floatingStoper>=moduleSize) floatingStoper=moduleSize;
-  // if(floatingStoper==moduleSize) incPaddle=moduleSize-1;
-  
+ //  if(floatingStoper>=moduleSize) floatingStoper=moduleSize;
+ //  if(floatingStoper==moduleSize) incPaddle=moduleSize-1;
   }   
  }
  
  void mousePressed() {
  //void mouseReleased() {
  if(boolButton)
- {
-   if(incPaddle==floatingStoper && flag==false)
-   {
-   incPaddle++;
-   flag=true;
-   }
-   if(incPaddle!=floatingStoper) { flag=true;  } 
-   if(incPaddle==floatingStoper && flag==true)
-   {
-   incPaddle++;
-   floatingStoper=1;
-   flag=false;
-     
-   }
-  // if(incPaddle>=moduleSize) incPaddle=moduleSize;
-  // if(floatingStoper>=moduleSize) floatingStoper=moduleSize;
-  /*
-       if(mods[floatingStoper].rectHight > mods[floatingStoper+1].rectHight)  
+ {  
+  counter++; 
+  if(mods[floatingStoper].rectHight < mods[floatingStoper-1].rectHight)  
     {     
      vTemp= mods[floatingStoper-1].rectHight;
      mods[floatingStoper-1].rectHight=mods[floatingStoper].rectHight;
      mods[floatingStoper].rectHight=vTemp;
     }
-   
- */  
- }
-  //print(incPaddle-1);
-  // print(" ");
-  // print(incPaddle);
-  // println();
+  if (floatingStoper!=incPaddle ) {floatingStoper++;} 
+  }
+   //print(incPaddle-1);
+   //print(" ");
+   //print(incPaddle);
+   //println();
 }
 
  void buttonUpdate() {
