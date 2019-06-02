@@ -1,3 +1,4 @@
+int counter;
 int moduleSize = 10;
 // floatingStoper
 int floatingStoper = moduleSize;
@@ -42,6 +43,9 @@ void draw() {
   //paddleX = incPaddle*30;
   //floatingStoper
   rect (floatingStoper*30, 75, 20, 5);
+  
+  textSize(25);
+  text(counter,300,300);
   // draw button
   fill(50);
   rect(buttonX,buttonY,buttonSize,buttonSize);
@@ -95,6 +99,7 @@ void mouseReleased() {
  //void mouseReleased() {
  if(boolButton)
  {  
+ counter++; 
   if(mods[incPaddle].rectHight < mods[incPaddle-1].rectHight)  
     {     
      vTemp= mods[incPaddle-1].rectHight;
