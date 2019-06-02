@@ -34,7 +34,7 @@ void setup() {
   }
 
 void draw() { 
-  background(10);
+  background(50);
      buttonUpdate();  
   for (Module mod : mods) {  mod.display();  }
   
@@ -47,7 +47,7 @@ void draw() {
   textSize(25);
   text(counter,300,300);
   // draw button
-  fill(50);
+  fill(150);
   rect(buttonX,buttonY,buttonSize,buttonSize);
    if(boolButton && mousePressed)  
   { 
