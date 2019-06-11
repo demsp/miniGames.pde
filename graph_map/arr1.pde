@@ -1,7 +1,7 @@
 ArrayList<Ball> balls;
 int ballWidth = 40;
 int f=0;
-int vertX=200;
+int vertX=100;
 int vertY=200;
 
 int counter;
@@ -92,16 +92,8 @@ class Module {
  if(boolButton) 
  {
  vertX=vertX+50;  
- balls.add(new Ball(vertX, vertY, ballWidth));
- 
- 
- counter++; 
-  if(mods[incPaddle].rectHight < mods[incPaddle-1].rectHight)  
-    {     
-     vTemp= mods[incPaddle-1].rectHight;
-     mods[incPaddle-1].rectHight=mods[incPaddle].rectHight;
-     mods[incPaddle].rectHight=vTemp;
-    }
+ balls.add(new Ball(vertX, vertY,  mods[incPaddle-1].rectHight ));
+  counter++; 
   } 
 }
 //отжатие 
@@ -137,28 +129,22 @@ boolean overButton(int x, int y, int width, int height)  {
  class Ball {
   float x;
   float y;
-  float speed;
-  float gravity;
-  float w;
-  float life = 255;
- 
-  Ball(float tempX, float tempY, float tempW) {
+  int num;
+  
+  Ball(float tempX, float tempY, int tempNum) {
     x = tempX;
     y = tempY;
-    w = tempW;
+    num = tempNum;
   }  
   
   void display() {
-    // Display the circle
-    fill(0,life);
-    //stroke(0,life);
-   // ellipse(x,y,w,w);
-  // fill(f);
+    // Display the circle  
    fill(100);
-   rect(x,y,w,w);
+   rect(x,y,50,50);
    fill(20);
    textSize(25);
-   text(mods[incPaddle-1].rectHight,vertX+5,vertY+30);
+   // mods[incPaddle-1].rectHight
+   text(num,x+5,y+30);
    
    println("x=",x);
    println("y=",y);
