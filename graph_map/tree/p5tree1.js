@@ -7,7 +7,8 @@ noCanvas();
 var n = new Node(5);
 tree=new Tree();
 tree.addNode(n);
-console.log(Tree);
+//console.log(Tree);
+  console.log(tree);
 }
 
 //function draw() { }
