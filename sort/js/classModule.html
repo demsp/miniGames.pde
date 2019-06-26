@@ -1,0 +1,41 @@
+<!-- https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_canvas_rect -->
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="300" height="150" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+class Module {
+  constructor(x,height) {
+    this.x = x;
+    this.height = height;
+  }
+  display() {
+  var c = document.getElementById("myCanvas");
+  var ctx = c.getContext("2d");
+  
+  ctx.beginPath();
+  ctx.lineWidth = "2";
+  ctx.strokeStyle = "black";
+  ctx.rect(this.x, 20, 20, this.height);
+  ctx.stroke();
+  }
+
+}
+
+let mod = new Module(10,50);
+mod.display();
+let mod1 = new Module(50,100);
+mod1.display();
+
+//var c = document.getElementById("myCanvas");
+//var ctx = c.getContext("2d");
+//ctx.rect(20, 20, 15, 15);
+//ctx.rect(50, 20, 15, 15);
+//ctx.stroke();
+</script> 
+
+</body>
+</html>
