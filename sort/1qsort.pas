@@ -1,3 +1,5 @@
+// http://otadmina.ru/quicksort/
+
  program ideone;
     var
      v: array [1..8] of integer; 
