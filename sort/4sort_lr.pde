@@ -31,14 +31,14 @@ void setup() {
  mods[8] = new Module(9*30,  90);
  mods[9] = new Module(10*30, 100);  
  */
- mods[0] = new Module(1*30,  60);
- mods[1] = new Module(2*30,  20);
+ mods[0] = new Module(1*30,  10);
+ mods[1] = new Module(2*30,  80);
  mods[2] = new Module(3*30,  30);
  mods[3] = new Module(4*30,  40);
  mods[4] = new Module(5*30,  50);
- mods[5] = new Module(6*30,  10);
+ mods[5] = new Module(6*30,  60);
  mods[6] = new Module(7*30,  70);
- mods[7] = new Module(8*30,  80);
+ mods[7] = new Module(8*30,  20);
  //mods[8] = new Module(9*30,  90);
  //mods[9] = new Module(10*30, 100);
 }
