@@ -213,8 +213,10 @@ println();
 println("iGlob=",iGlob);
 println("jGlob=",jGlob);
 
-if(l==round( (iGlob+jGlob)/2 ) || r==round( (iGlob+jGlob)/2 ) )
- { sorted(1,round( (iGlob+jGlob)/2 ));
+if(l==round( (iGlob+jGlob)/2 )   ) {  // if(pflag) 
+ sorted(iGlob,round( (iGlob+jGlob)/2 )); 
+ }
+
 } 
 
 void buttonUpdate() {
