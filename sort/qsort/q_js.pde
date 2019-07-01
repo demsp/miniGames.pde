@@ -22,7 +22,10 @@ Module[] mods;
 
 void setup() {
 	 size(400, 400);
-
+ listL = new int[0];
+ listR = new int[0]; 
+   listL = append(listL,1);
+   listR = append(listR,5);
  mods = new Module[moduleSize];
  
  mods[0] = new Module(1*30,  80);
@@ -103,16 +106,22 @@ void sort(int L,int R){
  if(mods[halfTemp-1].rectHight<mods[R-1].rectHight && R>=halfTemp ) R--; 
           limiterR=R;  
 /*
-if(boolButton && listOfCoordinatesX.length>1){   
-    listOfCoordinatesX=shorten(listOfCoordinatesX);
-    listOfCoordinatesY=shorten(listOfCoordinatesY);
-*/
+if(listL.length>1){  listL=shorten(listL);    listR=shorten(listR);  } */
+	
 	if(L==R){
   //***//if(listL.size()!=0) {limiterL=listL.pop(); limiterR=listR.pop(); }
 	//if(listL.length>2) { limiterL=shorten(listL); limiterR=shorten(listR); } 
-if(listL!=null) { limiterL=shorten(listL); limiterR=shorten(listR); } 		
+
+  // if(listL!=null) { limiterL=shorten(listL); limiterR=shorten(listR); } 		
+		if(listL.length>1) { limiterL=shorten(listL); limiterR=shorten(listR); } 		
+	
+//	trigger=false;  
+//	listL=append(listL,triggerTempL);
+//  listR=append(listR,halfTemp);
 		
-	 }
+ // listL=append(listL,halfTemp+1);
+ // listR=append(listR,triggerTempR);
+ }
 
 } // sort end	
 
