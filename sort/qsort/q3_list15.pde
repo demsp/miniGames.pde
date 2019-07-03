@@ -1,3 +1,11 @@
+mods[0] = new Module(1*30,  30);
+ mods[1] = new Module(2*30,  50);
+ mods[2] = new Module(3*30,  20);
+ mods[3] = new Module(4*30,  70);
+ mods[4] = new Module(5*30,  40);
+
+ mods[5] = new Module(6*30,  80);
+
 IntList listL;
 IntList listR;
 int halfTemp;
