@@ -122,8 +122,8 @@ void sort(int L,int R){
      mods[L-1].rectHight=mods[R-1].rectHight;
      mods[R-1].rectHight=vTemp;    
     }
-   // condition for 1,2,4,3,5,6
    
+   // condition for 1,2,4,3,5,6   
    
    if(L==R-1 && mods[L-1].rectHight > mods[R-1].rectHight)
     {
