@@ -2,6 +2,12 @@
 // 32415
 // 1,2,3,6,4,5
 // 1,2,3,6,4,5
+
+// 23415
+// 32415
+//123654
+//123645
+
 IntList listL;
 IntList listR;
 
@@ -15,7 +21,7 @@ int triggerTempR;
 boolean shift;
 
 int counter;
-int moduleSize = 5;
+int moduleSize = 6;
 int limiterL = 1;
 int limiterR = moduleSize;
 int incPaddle=1;
@@ -31,24 +37,16 @@ Module[] mods;
 
 void setup() {
   size(400, 400);
- listL = new IntList(); 
- listR = new IntList(); 
+  listL = new IntList(); 
+  listR = new IntList(); 
  mods = new Module[moduleSize];
- /*
- mods[0] = new Module(1*30,  60);
- mods[1] = new Module(2*30,  50);
- mods[2] = new Module(3*30,  40);
- mods[3] = new Module(4*30,  30);
- mods[4] = new Module(5*30,  20);
- mods[5] = new Module(6*30,  10);
- */
- //123645
- mods[0] = new Module(1*30,  30);
+ 
+ mods[0] = new Module(1*30,  10);
  mods[1] = new Module(2*30,  20);
- mods[2] = new Module(3*30,  40);
- mods[3] = new Module(4*30,  10);
-  mods[4] = new Module(5*30, 50);
-//  mods[5] = new Module(6*30,  50);
+ mods[2] = new Module(3*30,  30);
+ mods[3] = new Module(4*30,  60);
+ mods[4] = new Module(5*30,  40);
+ mods[5] = new Module(6*30,  50);
  //mods[6] = new Module(7*30,  70);
  //mods[7] = new Module(8*30,  80);
  
@@ -116,12 +114,6 @@ void mouseReleased() {
  if(boolButton)
  {  
  counter++;  
- println(listL);
- println(listR);
- println("halfTemp ",halfTemp);
- if(halfTemp!=0) println("mods[halfTemp-1] ",mods[halfTemp-1].rectHight);
- println("trigger ",trigger);
- 
  sort(limiterL,limiterR);
   }
 }
@@ -132,11 +124,16 @@ void sort(int L,int R){
  triggerTempL=L;
  triggerTempR=R;
  halfTemp = round(triggerTempL+triggerTempR)/2;
-// halfTemp = floor(triggerTempL+triggerTempR)/2;
-
- // println("halfTemp ",halfTemp);
- // println("mods[halfTemp-1] ",mods[halfTemp-1].rectHight);
- //println("trigger ",trigger);
+ println("halfTemp ",halfTemp);
+ println("mods[halfTemp] ",mods[halfTemp-1].rectHight);
+ println("trigger ",trigger);
+ listL.append(triggerTempL);
+ listR.append(halfTemp);
+ listL.append(halfTemp+1);
+listR.append(triggerTempR); 
+ println(listL);
+ println(listR);
+ 
  trigger=true;}
  //              //              //
  if(mods[L-1].rectHight >mods[halfTemp-1].rectHight && 
@@ -146,8 +143,9 @@ void sort(int L,int R){
      mods[L-1].rectHight=mods[R-1].rectHight;
      mods[R-1].rectHight=vTemp;    
     }
-   // condition for 1,2,4,3,5,6
-      
+   
+   // condition for 1,2,4,3,5,6   
+   
    if(L==R-1 && mods[L-1].rectHight > mods[R-1].rectHight)
     {
     vTemp= mods[L-1].rectHight;
@@ -161,31 +159,20 @@ void sort(int L,int R){
  if(mods[halfTemp-1].rectHight<mods[R-1].rectHight && R>=halfTemp ) R--; 
           limiterR=R;    
  
- // println(triggerTempL-1);
-  if(L==R){  
-  //if(listL.size()!=0) {limiterL=listL.pop(); limiterR=listR.pop(); }
-  trigger=false;
-  listL.append(triggerTempL);
-  listR.append(halfTemp);
-  listL.append(halfTemp+1);
-  listR.append(triggerTempR);         
-  }
- // for 1,2,3,4,6,5 
- if(listL.size()>2)
- {
-  if(listL.get( listL.size()-2 )==listR.get( listR.size()-2 )) {
-     listL.pop(); listR.pop();   
-      listL.pop(); listR.pop();
-       limiterL=listL.pop(); limiterR=listR.pop();
-   /*    
-   triggerTempL=L;
-    triggerTempR=R;
-     halfTemp = round(triggerTempL+triggerTempR)/2;
-     */
+  // println(triggerTempL-1);
+    if(L==R)
+    {  
+     limiterL=listL.pop(); limiterR=listR.pop(); 
+     trigger=false;
+     /* 
+     if(listL.get( listL.size()-1 )==listR.get( listR.size()-1 )) 
+       { listL.pop(); listR.pop(); 
+       if(listL.size()!=0) {limiterL=listL.pop(); limiterR=listR.pop();}   
+       }
+    */
     }
- } 
- 
-} //end sort
+}
+
 
  void buttonUpdate() {
   if ( overButton(buttonX, buttonY, buttonSize, buttonSize)  ) {
