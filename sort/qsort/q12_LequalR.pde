@@ -155,11 +155,17 @@ listR.append(triggerTempR); }
      mods[L-1].rectHight=mods[R-1].rectHight;
      mods[R-1].rectHight=vTemp;
     }    
-    //              //     
+    //              //   
+ // println(halfTemp);
+ // println(R);    
+ if(L!=halfTemp && R!=halfTemp){
  if(mods[L-1].rectHight<mods[halfTemp-1].rectHight && L<=halfTemp ) L++; 
           limiterL=L;
  if(mods[halfTemp-1].rectHight<mods[R-1].rectHight && R>=halfTemp ) R--; 
-          limiterR=R;    
+          limiterR=R;     
+ }  
+else if(L!=halfTemp && R==halfTemp) {L++; limiterL=L;}
+else if(L==halfTemp && R!=halfTemp) {R--; limiterR=R;}
  
   // println(triggerTempL-1);
     if(L==R)
