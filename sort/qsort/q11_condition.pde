@@ -1,3 +1,6 @@
+// 25314678
+// 35214678
+// 85214673
 
 int halfTemp;
 //   boolean flag;
@@ -9,7 +12,7 @@ int triggerTempR;
 boolean shift;
 
 int counter;
-int moduleSize = 6;
+int moduleSize = 8;
 int limiterL = 1;
 int limiterR = moduleSize;
 int incPaddle=1;
@@ -27,15 +30,14 @@ void setup() {
   size(400, 400);
  mods = new Module[moduleSize];
  
- mods[0] = new Module(1*30,  60);
+ mods[0] = new Module(1*30,  30);
  mods[1] = new Module(2*30,  50);
- mods[2] = new Module(3*30,  40);
- mods[3] = new Module(4*30,  30);
- mods[4] = new Module(5*30,  20);
- mods[5] = new Module(6*30,  10);
- //mods[6] = new Module(7*30,  70);
- //mods[7] = new Module(8*30,  80);
- 
+ mods[2] = new Module(3*30,  20);
+ mods[3] = new Module(4*30,  10);
+ mods[4] = new Module(5*30,  40);
+ mods[5] = new Module(6*30,  60);
+ mods[6] = new Module(7*30,  70);
+ mods[7] = new Module(8*30,  80);
 // */
  /*
  mods[0] = new Module(1*30,  80);
@@ -109,35 +111,29 @@ void sort(int L,int R){
  if(!trigger) {
  triggerTempL=L;
  triggerTempR=R;
- halfTemp = round(triggerTempL+triggerTempR)/2;
- println("halfTemp ",halfTemp);
- println("mods[halfTemp] ",mods[halfTemp-1].rectHight);
- println("trigger ",trigger);
+ 
  trigger=true;}
  //              //              //
- if(mods[L-1].rectHight >mods[halfTemp-1].rectHight && 
-      mods[R-1].rectHight<mods[halfTemp-1].rectHight )  
+ if(mods[L-1].rectHight > mods[R-1].rectHight )  
     {     
      vTemp= mods[L-1].rectHight;
      mods[L-1].rectHight=mods[R-1].rectHight;
      mods[R-1].rectHight=vTemp;    
+     L++; 
+    limiterL=L;
     }
-   
-   // condition for 1,2,4,3,5,6   
-   
-   if(L==R-1 && mods[L-1].rectHight > mods[R-1].rectHight)
-    {
-    vTemp= mods[L-1].rectHight;
-     mods[L-1].rectHight=mods[R-1].rectHight;
-     mods[R-1].rectHight=vTemp;
+   else if(mods[L-1].rectHight < mods[R-1].rectHight )  
+    {    
+     R--; 
+    limiterR=R;
     }
-    
-    //              //     
+ //              //              //     
+ /*
  if(mods[L-1].rectHight<mods[halfTemp-1].rectHight && L<=halfTemp ) L++; 
           limiterL=L;
  if(mods[halfTemp-1].rectHight<mods[R-1].rectHight && R>=halfTemp ) R--; 
           limiterR=R;    
- 
+ */
    println(triggerTempL-1);
            
 }
@@ -158,3 +154,4 @@ boolean overButton(int x, int y, int width, int height)  {
   return false;
   }
 }
+
