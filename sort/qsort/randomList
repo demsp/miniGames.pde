@@ -1,0 +1,38 @@
+ArrayList balls;
+
+void setup() {
+
+  size(200, 200);
+
+  balls = new ArrayList();  // Create an empty ArrayList
+
+  balls.add(0);  // Start by adding one element
+
+}
+
+
+
+void draw() {
+
+  background(100);
+
+  
+
+  // for (int i = balls.size()-1; i >= 0; i--) {  } 
+ rect(10,10,100,100);
+	
+	for (int i = balls.size()-1; i >= 0; i--) { print(balls.get(i) + " ");  } 
+	//println(balls);
+println();
+}
+
+
+
+void mousePressed() {
+
+  // A new ball object is added to the ArrayList, by default to the end
+  int newVar = int(random(1,10));
+  if(!balls.contains(newVar)) balls.add(newVar );
+
+}
+
