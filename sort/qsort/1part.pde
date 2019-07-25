@@ -1,10 +1,20 @@
+IntList listL;
+IntList listR;
+//ArrayList listRand;
+int pivotTemp;
+boolean trigger;
+int max;
+
+//ArrayList listRand;
+int newRand;
+
 boolean flag;
 
 int counter;
 int moduleSize = 10;
-int limiterR = moduleSize;
+int pivot = moduleSize;
 int limiterL=1;
-int incPaddle=1;
+int slider=1;
 
  int vTemp;
 //button
@@ -18,6 +28,8 @@ Module[] mods;
 void setup() {
   size(400, 400);
  mods = new Module[moduleSize];
+ listL= new IntList();
+ listR= new IntList();
  //*
  mods[0] = new Module(1*30,  20);
  mods[1] = new Module(2*30,  40);
@@ -50,8 +62,8 @@ void draw() {
    for (Module mod : mods) {  mod.display();  }
   
    // paddle
-  rect (incPaddle*30, 85, 20, 5);
-  rect (limiterR*30, 75, 20, 5);
+  rect (slider*30, 85, 20, 5);
+  rect (pivot*30, 75, 20, 5);
    rect (limiterL*30, 65, 20, 5);
   
   textSize(25);
@@ -87,10 +99,10 @@ class Module {
 void mouseReleased() {
  if(boolButton)
  {
-  if(incPaddle<limiterR) incPaddle++;
-    if(incPaddle>=limiterR && flag)  {
-    limiterR--;
-    incPaddle=limiterL;
+  if(slider<pivot) slider++;
+    if(slider>=pivot && flag)  {
+    pivot--;
+    slider=limiterL;
     flag=false;
     } 
    
@@ -101,11 +113,11 @@ void mouseReleased() {
  if(boolButton)
  {
  counter++; 
- if(mods[incPaddle-1].rectHight > mods[limiterR-1].rectHight)
+ if(mods[slider-1].rectHight > mods[pivot-1].rectHight)
   {
-    vTemp= mods[incPaddle-1].rectHight;
-    mods[incPaddle-1].rectHight=mods[incPaddle].rectHight;
-    mods[incPaddle].rectHight=vTemp;
+    vTemp= mods[slider-1].rectHight;
+    mods[slider-1].rectHight=mods[slider].rectHight;
+    mods[slider].rectHight=vTemp;
     flag=true;
     }
   } //boolButton
