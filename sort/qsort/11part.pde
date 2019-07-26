@@ -1,14 +1,14 @@
 IntList listL;
 IntList listR;
-//ArrayList listRand;
+ArrayList listRand;
 int pivotTemp;
+int tempR;
 boolean trigger;
-int max;
-
-//ArrayList listRand;
+//int max;
 int newRand;
 
-boolean flag;
+boolean flag,flag1;
+boolean switcher,switcher1;
 
 int counter;
 int moduleSize = 10;
@@ -28,9 +28,44 @@ Module[] mods;
 void setup() {
   size(400, 400);
  mods = new Module[moduleSize];
+ listRand = new ArrayList(10);
  listL= new IntList();
  listR= new IntList();
- //*
+//* 
+ mods[0] = new Module(1*30,  randFoo()*10 );
+ mods[1] = new Module(2*30,  randFoo()*10 );
+ mods[2] = new Module(3*30,  randFoo()*10 );
+ mods[3] = new Module(4*30,  randFoo()*10 );
+ mods[4] = new Module(5*30,  randFoo()*10 );
+ mods[5] = new Module(6*30,  randFoo()*10 );
+ mods[6] = new Module(7*30,  randFoo()*10 );
+ mods[7] = new Module(8*30,  randFoo()*10 );
+ mods[8] = new Module(9*30,  randFoo()*10 );
+ mods[9] = new Module(10*30,  randFoo()*10 );
+ //*/
+ /*
+ mods[0] = new Module(1*30,  30);
+ mods[1] = new Module(2*30,  70);
+ mods[2] = new Module(3*30,  80);
+ mods[3] = new Module(4*30,  20);
+ mods[4] = new Module(5*30,  40);
+ mods[5] = new Module(6*30,  60);
+ mods[6] = new Module(7*30,  50);
+ mods[7] = new Module(8*30,  10);
+ //*/
+ 
+ /*
+ mods[0] = new Module(1*30,  40);
+ mods[1] = new Module(2*30,  60);
+ mods[2] = new Module(3*30,  30);
+ mods[3] = new Module(4*30,  20);
+ mods[4] = new Module(5*30,  70);
+ mods[5] = new Module(6*30,  50);
+ mods[6] = new Module(7*30,  80);
+ mods[7] = new Module(8*30,  10);
+ //*/
+ 
+ /*
  mods[0] = new Module(1*30,  50);
  mods[1] = new Module(2*30,  40);
  mods[2] = new Module(3*30,  100);
@@ -62,8 +97,8 @@ void draw() {
    for (Module mod : mods) {  mod.display();  }
   
    // paddle
-  rect (slider*30, 85, 20, 5);
-  rect (pivot*30, 75, 20, 5);
+  rect (pivot*30, 85, 20, 5);
+  rect ( (pivot+1)*30, 85, 20, 5);
    rect (limiterR*30, 65, 20, 5);
   
   textSize(25);
@@ -76,7 +111,7 @@ void draw() {
     fill(200);
     rect(buttonX,buttonY,buttonSize,buttonSize);
    }
- println(flag);
+// println(flag);
 }
 
 class Module {
@@ -96,13 +131,15 @@ class Module {
 }
 
 // button
+// button
 void mouseReleased() {
  if(boolButton)
  {
    if(!flag) limiterR--;
    if(flag)  {
-   pivot=slider;  
-   slider=pivot+1;
+  // pivot=slider;  
+  // slider=pivot+1;
+  pivot++;
    flag=false;
     } 
    
@@ -113,17 +150,17 @@ void mouseReleased() {
  if(boolButton)
  {
  counter++; 
-if(mods[slider-1].rectHight > mods[pivot-1].rectHight)
+if(mods[pivot].rectHight > mods[pivot-1].rectHight)
   {
-    vTemp= mods[slider-1].rectHight;
-    mods[slider-1].rectHight=mods[limiterR-1].rectHight;
+    vTemp= mods[pivot].rectHight;
+    mods[pivot].rectHight=mods[limiterR-1].rectHight;
     mods[limiterR-1].rectHight=vTemp;
   
     }
- if(mods[slider-1].rectHight < mods[pivot-1].rectHight)
+ if(mods[pivot].rectHight < mods[pivot-1].rectHight)
   {
-    vTemp= mods[slider-1].rectHight;
-    mods[slider-1].rectHight=mods[pivot-1].rectHight;
+    vTemp= mods[pivot].rectHight;
+    mods[pivot].rectHight=mods[pivot-1].rectHight;
     mods[pivot-1].rectHight=vTemp;
     flag=true;
     }
@@ -145,4 +182,11 @@ boolean overButton(int x, int y, int width, int height)  {
 } else {
   return false;
   }
-} 
+}
+
+int randFoo(){
+  newRand = int(random(1,11));
+  if(!listRand.contains(newRand) )  listRand.add(newRand );
+    else newRand=randFoo();
+    return newRand;
+}
