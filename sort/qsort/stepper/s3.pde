@@ -12,7 +12,7 @@ boolean trigger;
 //int max;
 int newRand;
 
-boolean stepFlag,meetingFlag,jumpFlag;
+boolean stepFlag,meetingFlag,jumpFlag,IversonFlag=true;
 boolean switcher,switcher1;
 
 int counter;
@@ -120,8 +120,8 @@ void draw() {
     rect(buttonX,buttonY,buttonSize,buttonSize);
    }
 // println(stepFlag);
-println(listL);
-println(tempR);
+//println(tempR);
+//println(listL);
 }
 
 class Module {
@@ -160,8 +160,18 @@ void mouseReleased() {
    stepFlag=false;
     } 
   }//end else  
-  }
-}
+ 
+   if(jumpFlag && limiterR>pivot && 
+     (mods[limiterR-2].rectHight>mods[limiterR-1].rectHight || 
+       mods[pivot-1].rectHight>mods[pivot].rectHight )  ) 
+   { IversonFlag=false; }
+   
+ println(IversonFlag);
+ println(tempR);
+ println(listL);
+   
+  }///  
+}///
  
  void mousePressed() {
   if(boolButton)
@@ -191,11 +201,13 @@ if(mods[pivot].rectHight > mods[pivot-1].rectHight)
  if(pivot==limiterR){
  listL.append(pivot);
  meetingFlag=true;
+ IversonFlag=true;
  }
+ println(IversonFlag);
+ println(tempR);
  println(listL);
- } //boolButton
-
-}
+ } ///
+} ///
 
  void buttonUpdate() {
   if ( overButton(buttonX, buttonY, buttonSize, buttonSize)  ) {
