@@ -1,14 +1,7 @@
 // if(pivot==limiterR){ meetingFlag=true; }
-
-// if(keyPressed) edgeFlag=true;
-// if(!edgeFlag) limiterR jumps to moduleSize
-// if(edgeFlag) limiterR jumps to tempR
-
-//   if(pivot==moduleSize){ callFlag=true; return; }
-// if(callFlag){ Foo(); callFlag=false; return;} 
-
-//  if(pivot==moduleSize && listL.size()==1 && listL.get(listL.size()-1)==1) listL.append(9);
-
+// if(keyPressed) jumpFlag=true;
+// if(!jumpFlag) limiterR jumps to moduleSize
+// if(!jumpFlag) limiterR jumps to tempR
 IntList listL;
 IntList listR;
 ArrayList listRand;
@@ -18,11 +11,12 @@ boolean trigger;
 //int max;
 int newRand;
 
-boolean stepFlag,meetingFlag,edgeFlag,stopFlag,IversonFlag=true,callFlag;
+boolean stepFlag,meetingFlag,jumpFlag,IversonFlag=true;
+boolean callFlag; // for call Foo()
 boolean switcher,switcher1;
 
 int counter;
-int moduleSize = 15;
+int moduleSize = 10;
 int pivot = 1;
 int limiterR=moduleSize;
 int slider=2;
@@ -37,15 +31,15 @@ int count;
 Module[] mods;
 
 void setup() {
-  size(500, 400);
+  size(400, 400);
  mods = new Module[moduleSize];
-// listRand = new ArrayList(10);
- listRand = new ArrayList(15);
+ listRand = new ArrayList(10);
  listL= new IntList();
  listR= new IntList();
  listL.append(1);
 //* 
  mods[0] = new Module(1*30,  randFoo()*10 );
+ //mods[0] = new Module(1*30,  10 );
  mods[1] = new Module(2*30,  randFoo()*10 );
  mods[2] = new Module(3*30,  randFoo()*10 );
  mods[3] = new Module(4*30,  randFoo()*10 );
@@ -55,13 +49,7 @@ void setup() {
  mods[7] = new Module(8*30,  randFoo()*10 );
  mods[8] = new Module(9*30,  randFoo()*10 );
  mods[9] = new Module(10*30,  randFoo()*10 );
- //*
- mods[10] = new Module(11*30,  randFoo()*10 );
- mods[11] = new Module(12*30,  randFoo()*10 );
- mods[12] = new Module(13*30,  randFoo()*10 );
- mods[13] = new Module(14*30,  randFoo()*10 );
- mods[14] = new Module(15*30,  randFoo()*10 );
- //*/
+// mods[9] = new Module(10*30,  100 );
  //*/
  /*
  mods[0] = new Module(1*30,  10);
@@ -74,7 +62,43 @@ void setup() {
  mods[7] = new Module(8*30,  80);
  mods[8] = new Module(9*30,  90 );
  mods[9] = new Module(10*30, 60 );
- //*/ 
+ //*/
+ 
+ /*
+ mods[0] = new Module(1*30,  40);
+ mods[1] = new Module(2*30,  60);
+ mods[2] = new Module(3*30,  30);
+ mods[3] = new Module(4*30,  20);
+ mods[4] = new Module(5*30,  70);
+ mods[5] = new Module(6*30,  50);
+ mods[6] = new Module(7*30,  80);
+ mods[7] = new Module(8*30,  10);
+ //*/
+ 
+ /*
+ mods[0] = new Module(1*30,  50);
+ mods[1] = new Module(2*30,  40);
+ mods[2] = new Module(3*30,  100);
+ mods[3] = new Module(4*30,  30);
+ mods[4] = new Module(5*30,  90);
+ mods[5] = new Module(6*30,  60);
+ mods[6] = new Module(7*30,  80);
+ mods[7] = new Module(8*30,  10);
+ mods[8] = new Module(9*30,  70);
+ mods[9] = new Module(10*30, 20);  
+// */
+ /*
+ mods[0] = new Module(1*30,  20);
+ mods[1] = new Module(2*30,  30);
+ mods[2] = new Module(3*30,  10);
+ mods[3] = new Module(4*30,  50);
+ mods[4] = new Module(5*30,  90);
+ mods[5] = new Module(6*30,  60);
+ mods[6] = new Module(7*30,  80);
+ mods[7] = new Module(8*30,  40);
+ mods[8] = new Module(9*30,  70);
+ mods[9] = new Module(10*30, 100);  
+ //*/
 }
 
 void draw() { 
@@ -98,17 +122,8 @@ void draw() {
     rect(buttonX,buttonY,buttonSize,buttonSize);
    }
 // println(stepFlag);
-//println(listL);
 //println(tempR);
-
-  if(edgeFlag && limiterR>pivot && 
-     (mods[limiterR-2].rectHight>mods[limiterR-1].rectHight || 
-       mods[pivot-1].rectHight>mods[pivot].rectHight )  ) 
-   { IversonFlag=false; }
-println(listL);   
-println(IversonFlag);
- println(limiterR-2);
- println(limiterR-1);
+//println(listL);
 }
 
 class Module {
@@ -132,16 +147,12 @@ class Module {
 void mouseReleased() {
  if(boolButton)
  {
-  if(limiterR<pivot){pivot=1;limiterR++;return;}
-   
-   if(pivot==limiterR){IversonFlag=true;}
-    if(callFlag){  callFlag=false; Foo(); return;} 
-   //the End 
-    
+ if(callFlag){  callFlag=false; Foo(); return;} 
+ 
    if(meetingFlag){
    pivot++;
-   if(!edgeFlag)limiterR=moduleSize;
-   else if(edgeFlag) limiterR=tempR;
+   if(!jumpFlag)limiterR=moduleSize;
+   else if(jumpFlag) limiterR=tempR;
    meetingFlag=false;
    }
   else if(!meetingFlag){ 
@@ -150,21 +161,27 @@ void mouseReleased() {
    pivot++;
    stepFlag=false;
     } 
-  }//end else 
-  
-  
-  } 
-}
+  }//end else  
+ 
+   if(jumpFlag && limiterR>pivot &&     
+     mods[limiterR-2].rectHight>mods[limiterR-1].rectHight) 
+   { IversonFlag=false; }
+   
+ println(IversonFlag);
+ println(tempR);
+ println(listL);
+  }///  
+}///
  
  void mousePressed() {
   if(boolButton)
  {
-  if(limiterR<pivot){pivot=1;limiterR++;return;}
-  
- if(pivot==moduleSize || (pivot==limiterR && IversonFlag && edgeFlag) ){ callFlag=true; return; } 
- 
-  
- counter++;   
+  if(limiterR<pivot) {limiterR=pivot;pivot=1;if(listL.size()!=0)listL.pop();}  
+   
+ counter++;
+  if(pivot==moduleSize || (pivot==limiterR && IversonFlag && jumpFlag) ){ callFlag=true; return; } 
+  //the End
+  // if(pivot==1 && limiterR==1){pivot=1; limiterR=1; return;}
  
  if(mods[pivot-1].rectHight<mods[pivot].rectHight 
    && mods[pivot].rectHight<mods[limiterR-1].rectHight) return;
@@ -174,6 +191,7 @@ if(mods[pivot].rectHight > mods[pivot-1].rectHight)
     vTemp= mods[pivot].rectHight;
     mods[pivot].rectHight=mods[limiterR-1].rectHight;
     mods[limiterR-1].rectHight=vTemp;
+ //   if(jumpFlag) IversonFlag=false; ///
   }
  if(mods[pivot].rectHight < mods[pivot-1].rectHight)
   {
@@ -181,22 +199,20 @@ if(mods[pivot].rectHight > mods[pivot-1].rectHight)
     mods[pivot].rectHight=mods[pivot-1].rectHight;
     mods[pivot-1].rectHight=vTemp;
     stepFlag=true;
+   if(jumpFlag) IversonFlag=false; ///
     }
  } // end else
  
  if(pivot==limiterR){
  listL.append(pivot);
  meetingFlag=true;
+ IversonFlag=true;
  }
- 
-  //Iverson  
- 
- println(listL);
  println(IversonFlag);
- println(limiterR-2);
- println(limiterR-1);
- } //boolButton
-}
+ println(tempR);
+ println(listL);
+ } ///
+} ///
 
  void buttonUpdate() {
   if ( overButton(buttonX, buttonY, buttonSize, buttonSize)  ) {
@@ -215,38 +231,33 @@ boolean overButton(int x, int y, int width, int height)  {
 }
 
 int randFoo(){
-  newRand = int(random(1,16));
+ newRand = int(random(1,11)); 
+ //newRand = int(random(2,10));
   if(!listRand.contains(newRand) )  listRand.add(newRand );
     else newRand=randFoo();
     return newRand;
-}
+ }
 
-void keyPressed() {
- if(pivot==moduleSize && listL.size()==1 && listL.get(listL.size()-1)==1) listL.append(9);
-  if(listL.size()==0) return;
+//void keyPressed() {
+  void Foo(){  
+  IversonFlag=true;
+ //if(pivot==moduleSize && listL.size()==1 && listL.get(listL.size()-1)==1) 
+ if(pivot==moduleSize)
+   listL.append(moduleSize-1);
   
-   tempR= listL.get(listL.size()-1); 
-   limiterR=listL.pop();
+if(listL.size()!=0){ // for Edge
+ tempR= listL.get(listL.size()-1); 
+
+  // limiterR=listL.pop();
+  limiterR=tempR; 
+  listL.pop();    
+  } // end if
  if(listL.size()>1)   pivot= listL.get(listL.size()-1);
  else{
     limiterR=tempR;
    if(listL.size()==1) pivot= listL.get(listL.size()-1);
    if(listL.size()==0) return;
-    } 
-edgeFlag=true;
-}
-
-
-void Foo() {
-   if(pivot==moduleSize && listL.size()==1 && listL.get(listL.size()-1)==1) listL.append(9);
-  if(listL.size()==0) return;
-   tempR= listL.get(listL.size()-1); 
-   limiterR=listL.pop();
- if(listL.size()>1)   pivot= listL.get(listL.size()-1);
- else{
-    limiterR=tempR;
-   if(listL.size()==1) pivot= listL.get(listL.size()-1);
-   if(listL.size()==0) return;
-    } 
-edgeFlag=true;
+    }
+ jumpFlag=true;
+ println(tempR);
 }
