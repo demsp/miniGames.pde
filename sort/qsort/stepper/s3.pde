@@ -233,8 +233,9 @@ int randFoo(){
 }
 
 void keyPressed() {
-  if(keyCode==UP){listL.append(9);}  
-  else if(keyCode==DOWN){
+ if(pivot==moduleSize && listL.size()==1 && listL.get(listL.size()-1)==1) 
+   listL.append(moduleSize-1);
+  
   tempR= listL.get(listL.size()-1); 
    limiterR=listL.pop();
  if(listL.size()>1)   pivot= listL.get(listL.size()-1);
@@ -243,7 +244,5 @@ void keyPressed() {
    if(listL.size()==1) pivot= listL.get(listL.size()-1);
    if(listL.size()==0) return;
     }
-  } //end else 
-jumpFlag=true;
-
+ jumpFlag=true;
 }
