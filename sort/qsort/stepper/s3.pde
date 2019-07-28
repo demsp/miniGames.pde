@@ -162,8 +162,10 @@ void mouseReleased() {
   }//end else  
  
    if(jumpFlag && limiterR>pivot && 
-     (mods[limiterR-2].rectHight>mods[limiterR-1].rectHight || 
-       mods[pivot-1].rectHight>mods[pivot].rectHight )  ) 
+    // (
+     mods[limiterR-2].rectHight>mods[limiterR-1].rectHight 
+    // || mods[pivot-1].rectHight>mods[pivot].rectHight )    
+    ) 
    { IversonFlag=false; }
    
  println(IversonFlag);
@@ -188,6 +190,7 @@ if(mods[pivot].rectHight > mods[pivot-1].rectHight)
     vTemp= mods[pivot].rectHight;
     mods[pivot].rectHight=mods[limiterR-1].rectHight;
     mods[limiterR-1].rectHight=vTemp;
+ //   if(jumpFlag) IversonFlag=false; ///
   }
  if(mods[pivot].rectHight < mods[pivot-1].rectHight)
   {
@@ -195,6 +198,7 @@ if(mods[pivot].rectHight > mods[pivot-1].rectHight)
     mods[pivot].rectHight=mods[pivot-1].rectHight;
     mods[pivot-1].rectHight=vTemp;
     stepFlag=true;
+   if(jumpFlag) IversonFlag=false; ///
     }
  } // end else
  
@@ -233,11 +237,16 @@ int randFoo(){
 }
 
 void keyPressed() {
- if(pivot==moduleSize && listL.size()==1 && listL.get(listL.size()-1)==1) 
+  IversonFlag=true;
+ //if(pivot==moduleSize && listL.size()==1 && listL.get(listL.size()-1)==1) 
+ if(pivot==moduleSize)
    listL.append(moduleSize-1);
   
   tempR= listL.get(listL.size()-1); 
-   limiterR=listL.pop();
+  // limiterR=listL.pop();
+  limiterR=tempR; 
+  listL.pop();    
+  //
  if(listL.size()>1)   pivot= listL.get(listL.size()-1);
  else{
     limiterR=tempR;
@@ -245,4 +254,5 @@ void keyPressed() {
    if(listL.size()==0) return;
     }
  jumpFlag=true;
+ println(tempR);
 }
