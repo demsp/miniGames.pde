@@ -261,3 +261,14 @@ if(listL.size()!=0){ // for Edge
  jumpFlag=true;
  println(tempR);
 }
+
+
+/*
+ //min
+ if(mods[pivot-1].rectHight<mods[0].rectHight)
+ {
+  vTemp= mods[pivot-1].rectHight;
+    mods[pivot-1].rectHight=mods[0].rectHight;
+    mods[0].rectHight=vTemp;
+ }   
+*/
