@@ -1,11 +1,28 @@
 /*
-counter++; 
-if(pivot==limR){
+ if(boolButton)
+ {  
+ counter++; 
+
+if(pivot==limR)
+{
   limR= _list.pop();
-  if(limR==_list.get(_list.size()-1) ) _list.pop();
-  pivot=_list.get(_list.size()-1);
-  slider=pivot;
-               } 
+   if(_list.size()!=0)pivot=_list.get(_list.size()-1);
+     else pivot=1;
+      slider=pivot;
+   } 
+  if(slider>=limR)   { if(_list.size()==0) _list.append(pivot);    
+   else if( pivot!=_list.get(_list.size()-1) ) _list.append(pivot);
+    pivot++; slider=pivot; }
+   else{
+    if(mods[slider-1].rectHight < mods[pivot-1].rectHight)
+       { flag=true;
+        vTemp= mods[slider-1].rectHight;
+        mods[slider-1].rectHight=mods[slider-2].rectHight;
+        mods[slider-2].rectHight=vTemp;  }
+     }  
+     
+   println(_list);   
+  }///
 */
 
 boolean trigger;
