@@ -1,3 +1,13 @@
+/*
+counter++; 
+if(pivot==limR){
+  limR= _list.pop();
+  if(limR==_list.get(_list.size()-1) ) _list.pop();
+  pivot=_list.get(_list.size()-1);
+  slider=pivot;
+               } 
+*/
+
 boolean trigger;
 IntList _list;
 
