@@ -1,0 +1,23 @@
+https://jsfiddle.net/demso/1zdqLvne/13/
+
+<canvas id="canvas" width="200" height="200">
+            This text is displayed if your browser does not support HTML5 Canvas.
+        </canvas>
+        
+canvas {
+    border: 1px dotted black;
+}
+
+var my_canvas = document.getElementById('canvas'),
+    context = my_canvas.getContext("2d");
+
+context.fillStyle = "orange";
+//context.strokeRect(20,20,30,50);
+context.fillRect(20,20,50,50);
+
+function Class(x) {
+    this.x = x ;
+  context.fillStyle = "red";
+      context.fillRect(30,30,this.x,this.x);       
+}
+var subclass = new Class(60);
