@@ -1,0 +1,18 @@
+http://jsfiddle.net/demso/m8za13th/2/
+
+function Class(x) {
+    this.x = x || null;
+}
+
+function SubClass(x) {
+    Class.call(this, x);
+}
+
+SubClass.prototype = new Class();
+SubClass.prototype.constructor = Class.constructor;
+
+var subclass1 = new SubClass(10);
+console.log(subclass1.x);    // prints 10
+
+var subclass2 = new SubClass(11);
+console.log(subclass2.x);    // prints 11
