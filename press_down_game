@@ -1,0 +1,125 @@
+Создание игры с понижением номеров
+ 
+Создаём класс Module с экземплярами класса  <i>Module[] mods;</i>
+В setup() инициализируем экземпляры класса в цикле
+<source lang="java">
+void setup() {
+  frameRate(1);  // скорость обновления
+size(500, 400);
+mods = new Module[7];
+ for (int i = 0; i < 7; i++) {
+    mods[i] = new Module();
+  }
+</source> 
+
+В draw() просто выводим массив с помощью методов <i>mod.update();</i> и     <i>mod.display();</i>
+<source lang="java">
+void draw() {
+background(0); // цвет фона - черный
+  for (Module mod : mods) {
+    mod.update();
+    mod.display();
+    
+  text("↑ ", 100,280); // управление осуществляется стрелками
+  text("↓ ", 100,320);
+  text("← ", 50,320);
+  text("→ ", 150,320);
+  }
+}
+</source>
+
+Далее следует, собственно, сам класс Module
+<source lang="java">
+class Module {
+  int i;
+int[] data = new int[]{0,0,0,0,0,0,0};
+void update() {
+if(flag)data[i]++;
+if(i_flag) i++;
+}    
+void display() {
+  textSize(30);
+ for (int j = 0; j < 7; j += 1){
+      text(data[j],10+60*j,100);
+  }
+  text("data_mem index "+i, 10,200);
+  }
+}
+</source>
+
+Управление осуществляется стрелками. При нажатии стрелки поднимается/опускается соответствующий флаг. 
+При поднятом флаге увеличивается значение, записанное в ячейку <i>if(flag)data[i]++;</i> или 
+индекс ячейки <i>if(i_flag) i++;</i>. Если флаги опущены - значения не увеличиваются.
+<source lang="java">
+void keyPressed() {
+     if (keyCode == UP) {
+       if(!flag)flag=true;} 
+     if (keyCode == DOWN) {
+        if(flag)flag=false;   }
+        
+    if (keyCode == RIGHT) {
+       if(!i_flag) i_flag=true;} 
+     if (keyCode == LEFT) {
+        if(i_flag) i_flag=false;   }     
+ }
+</source>
+Весь код под спойлером
+<spoiler title="Object array">
+boolean flag;
+boolean i_flag;
+
+Module[] mods;
+void setup() {
+  frameRate(1);
+size(500, 400);
+mods = new Module[7];
+ for (int i = 0; i < 7; i++) {
+       mods[i] = new Module();
+  }
+}
+void draw() {
+background(0);
+  for (Module mod : mods) {
+    mod.update();
+    mod.display();
+    println("flag= ",flag);
+    println("i_flag= ",i_flag);
+    
+  text("↑ ", 100,280);
+  text("↓ ", 100,320);
+  text("← ", 50,320);
+  text("→ ", 150,320);
+  }
+}
+void keyPressed() {
+     if (keyCode == UP) {
+       if(!flag)flag=true;} 
+     if (keyCode == DOWN) {
+        if(flag)flag=false;   }
+        
+    if (keyCode == RIGHT) {
+       if(!i_flag) i_flag=true;} 
+     if (keyCode == LEFT) {
+        if(i_flag) i_flag=false;   }     
+ }
+
+class Module {
+int i;
+int[] data = new int[]{0,0,0,0,0,0,0};
+// Contructor
+void update() {
+if(flag)data[i]++;
+if(i_flag) i++;
+}    
+    
+void display() {
+  textSize(30);
+ for (int j = 0; j < 7; j += 1){
+      text(data[j],10+60*j,100);
+  }
+  text("data_mem index "+i, 10,200);
+ }
+}
+</spoiler>
+Проверить работу программы онлайн можно <a href="https://demsp.github.io/obj_array.html">здесь</a>.
+
