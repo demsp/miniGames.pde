@@ -5,6 +5,8 @@ int rand2Val;
 int rand3Val;
 int heap1=int(random(1,30));
 int heap2=int(random(1,30));
+//int heap1=13;
+//int heap2=7;
 int rand123;
 int counter1;
 int counter2;
@@ -51,6 +53,12 @@ void draw() {
 	if(boolButton3 && mousePressed)  //button2
   { fill(200);
     rect(button3X,button3Y,buttonSize,buttonSize);
+	 for (int y = 0; y <10; y += 1) {  // logic
+		 if(arr[y][0]==heap1 && arr[y][1]<heap2) heap2=arr[y][1];
+	   if(arr[y][1]==heap1 && arr[y][0]<heap2) heap2=arr[y][0];
+		 if(arr[y][0]==heap2 && arr[y][1]<heap1) heap1=arr[y][1];
+	   if(arr[y][1]==heap2 && arr[y][0]<heap1) heap1=arr[y][0];
+	     } //logic
    } 
 	
 	 for (int y = 0; y <10; y += 1) {
@@ -88,7 +96,7 @@ void draw() {
 	text(rand1Val,10,300);
 	text(rand2Val,10,320);
 	text(rand3Val,10,340);
-}
+} //draw
 
 // кнопка
 // нажатие 
@@ -110,20 +118,13 @@ rand3Val=int(random(1,min(heap1,heap2)));
  if(counter1==0 || counter2==0 || (counter1==counter2)) {
 	 counter1=0;
 	 counter2=0; 
-	 
-	for (int y = 0; y <10; y += 1) {    
-		  if(arr[0][y]==heap1 && arr[1][y]>heap2) heap2=arr[y][1];
-		  if(arr[0][y]==heap2 && arr[1][y]>heap1) heap1=arr[y][1];
-	  //	
-      if(arr[y][0]==heap1 && arr[y][1]>heap2) heap2=arr[y][1];
-		  if(arr[y][0]==heap2 && arr[y][1]>heap1) heap1=arr[y][1];
-			
-    }
-   
-	// if(rand123==1)heap1=heap1-rand1Val;
-	// if(rand123==2)heap2=heap2-rand2Val;
-	// if(rand123==3){heap1=heap1-rand3Val;heap2=heap2-rand3Val; }
-   }
+  /*	
+	 if(arr[0][0]==heap1 && arr[0][1]<heap2) heap2=arr[0][1];
+	 if(arr[1][0]==heap1 && arr[1][1]<heap2) heap2=arr[1][1];
+	 if(arr[2][0]==heap1 && arr[2][1]<heap2) heap2=arr[2][1];
+	 if(arr[3][0]==heap1 && arr[3][1]<heap2) heap2=arr[3][1];
+	 */
+	 }
   } //button3 	 
 
  }
