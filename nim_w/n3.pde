@@ -57,7 +57,8 @@ if(heap1==2 && heap2==1 && !my_bool) {heap1=1;heap2=1;my_bool=true;}
 // 1zero
  if(heap1==0 && heap2!=0 && !my_bool) {heap2=0;my_bool=true;}
  if(heap2==0 && heap1!=0 && !my_bool) {heap1=0;my_bool=true;}
- if(heap1==heap2 && !my_bool) {heap1=0;heap2=0;my_bool=true;}
+// heap1==heap2
+ if(heap1==heap2 && !my_bool) {heap1=heap2=0;my_bool=true;}
 //logic
 for(int i=0;i<10;i++){
  //random
