@@ -1,169 +1,117 @@
 int[][] arr;
+int rand=int(random(1,3));
+int counter1 = 0;
+int counter2 = 0;
+int heap1 = int(random(1,30)); 
+int heap2 = int(random(1,30));
+int button1X=90; int buttonY=300;
+int button2X=500;
+int buttonSize=120;
+int button3X=500;
+int button3Y=500;
+int button3Size=170;
+int currentColor=90, baseColor=90;
+boolean rect1Over=false, rect2Over=false, 
+        rect3Over=false,bool3rdPress=false;
+boolean my_bool;        
 
-int rand1Val;
-int rand2Val;
-int rand3Val;
-//int heap1=int(random(1,30));
-//int heap2=int(random(1,30));
-int heap1=12;
-int heap2=9; 
-int rand123;
-int counter1;
-int counter2;
-//button
-int button1X=90, button1Y=225; 
-int button2X=200, button2Y=225; 
-int button3X=300, button3Y=225; 
-int buttonSize = 50;     
-boolean boolButton1 = false;
-boolean boolButton2 = false;
-boolean boolButton3 = false;
-boolean bool=false;
-
-void setup() {
-  size(420, 400);
-	arr = new int[10][10];
-	arr[0][0]=1;arr[0][1]=2;
-	arr[1][0]=3;arr[1][1]=5;
-	arr[2][0]=4;arr[2][1]=7;
-	arr[3][0]=6;arr[3][1]=10;
-	arr[4][0]=8;arr[4][1]=13;
-	arr[5][0]=9;arr[5][1]=15;
-	arr[6][0]=11;arr[6][1]=18;
-	arr[7][0]=12;arr[7][1]=20;
-	arr[8][0]=14;arr[8][1]=23;
-	arr[9][0]=16;arr[9][1]=26;
+void setup(){
+size(700,700);
+arr = new int[10][10];
+  arr[0][0]=1;arr[0][1]=2;
+  arr[1][0]=3;arr[1][1]=5;
+  arr[2][0]=4;arr[2][1]=7;
+  arr[3][0]=6;arr[3][1]=10;
+  arr[4][0]=8;arr[4][1]=13;
+  arr[5][0]=9;arr[5][1]=15;
+  arr[6][0]=11;arr[6][1]=18;
+  arr[7][0]=12;arr[7][1]=20;
+  arr[8][0]=14;arr[8][1]=23;
+  arr[9][0]=16;arr[9][1]=26;
 }
-void draw() { 
-  background(50);
-	 buttonUpdate(); 
-	
-	int diff1=heap2-heap1;
-	int diff2=heap1-heap2;
-	text(diff1,280,350);
-	text(diff2,280,370);
-   // draw button
-  fill(150);
-  rect(button1X,button1Y,buttonSize,buttonSize);
-	rect(button2X,button2Y,buttonSize,buttonSize);
-	rect(button3X,button3Y,buttonSize,buttonSize);
-  
-	 if(boolButton1 && mousePressed) //button1 
-  { fill(200);
-    rect(button1X,button1Y,buttonSize,buttonSize);
-   }	
-	 if(boolButton2 && mousePressed)  //button2
-  { fill(200);
-    rect(button2X,button2Y,buttonSize,buttonSize);
-   } 
-	if(boolButton3 && mousePressed)  //button3
-  { fill(200);
-    rect(button3X,button3Y,buttonSize,buttonSize);
-	 for (int y = 0; y <10; y += 1) {  // logic
-		 if(arr[y][0]==heap1 && arr[y][1]<heap2) heap2=arr[y][1];
-	   if(arr[y][1]==heap1 && arr[y][0]<heap2) heap2=arr[y][0];
-		 if(arr[y][0]==heap2 && arr[y][1]<heap1) heap1=arr[y][1];
-	   if(arr[y][1]==heap2 && arr[y][0]<heap1) heap1=arr[y][0];
-		if(!bool){ if( arr[y][1]-arr[y][0]==diff1){heap1=arr[y][0];heap2=arr[y][1];bool=true;} 
-                if( arr[y][1]-arr[y][0]==diff2){heap1=arr[y][1];heap2=arr[y][0];bool=true;} 
-						 }
-	     } //logic
-	 
-   } //button3
-	
-	 for (int y = 0; y <10; y += 1) {
-    for (int x = 0; x < 10; x += 1) {
-      //println(arr[x][y]);
-			//if(arr[x][y]==heap1) println(heap1);
-			//if(arr[x][y]==heap2) println(heap2);
-      if(arr[x][y]==heap1) text(heap1,300,200);
-			if(arr[x][y]==heap2) text(heap2,350,200);
-    }
-  }
-	
-	
-	fill(100);
-  textSize(25);
-  //text(counter1,37,360);
-	//text(counter2,95,360);
-	text("Take",85,100); 
-	text(counter1,155,100);
-	text("from 1st heap",195,100);
-	text("and",85,130); 
-	text(counter2,155,130);
-	text("from 2st heap",195,130);
-	textSize(20);
-	text("Button1",80,300);
-	text("Button2",190,300);
-	text("Next Turn",290,300);
-	text(rand123,350,350);
-	
-	//heaps
-	textSize(50);
-	text(heap1,100,200);
-	text(heap2,200,200);
-	textSize(15);
-	text(rand1Val,10,300);
-	text(rand2Val,10,320);
-	text(rand3Val,10,340);
-} //draw
 
-// кнопка
-// нажатие 
- void mousePressed() {
- rand123=int(random(1,4)); 
- if(boolButton1) {  
-  if(heap1>=1) {heap1-=1; counter1++; }
-	 else heap1=0;
- } //button1 
-if(boolButton2) {  
- if(heap2>=1) {heap2-=1; counter2++; }
-	 else heap2=0;	
-  } //button2	 
+void draw(){
+background(50);
+fill(100);
+textSize(100);
+text(heap1,100,200);
+text(heap2,500,200);
+update();
+rect(button1X,buttonY,buttonSize,buttonSize);
+rect(button2X,buttonY,buttonSize,buttonSize);
+rect(button3X,button3Y,button3Size,button3Size);
+if(rect1Over && mousePressed){
+fill(150);
+rect(button1X,buttonY,buttonSize,buttonSize);}
+if(rect2Over && mousePressed){
+fill(150);
+rect(button2X,buttonY,buttonSize,buttonSize);}
 
-if(boolButton3) { 	
-rand1Val=int(random(1,heap1));
-rand2Val=int(random(1,heap2));
-rand3Val=int(random(1,min(heap1,heap2)));
- if(counter1==0 || counter2==0 || (counter1==counter2)) {
-	 counter1=0;
-	 counter2=0; 
-  /*	
-	 if(arr[0][0]==heap1 && arr[0][1]<heap2) heap2=arr[0][1];
-	 if(arr[1][0]==heap1 && arr[1][1]<heap2) heap2=arr[1][1];
-	 if(arr[2][0]==heap1 && arr[2][1]<heap2) heap2=arr[2][1];
-	 if(arr[3][0]==heap1 && arr[3][1]<heap2) heap2=arr[3][1];
-	 */
-	 }
-  } //button3 	 
+if(rect3Over && mousePressed){ //button3
+fill(150);
+rect(button3X,button3Y,button3Size,button3Size);
 
- }
-//отжатие 
- void mouseReleased() {bool=false; }
-
-void buttonUpdate() {
-  if ( overButton(button1X, button1Y, buttonSize, buttonSize)  ) {
-    boolButton1 = true;
-  } else {
-   boolButton1 = false;   }
+// 2 and 1
+if(heap1==1 && heap2==2 && !my_bool) {heap1=1;heap2=1;my_bool=true;}
+if(heap1==2 && heap2==1 && !my_bool) {heap1=1;heap2=1;my_bool=true;}
+// 1zero
+ if(heap1==0 && heap2!=0 && !my_bool) {heap2=0;my_bool=true;}
+ if(heap2==0 && heap1!=0 && !my_bool) {heap1=0;my_bool=true;}
+ if(heap1==heap2 && !my_bool) {heap1=0;heap2=0;my_bool=true;}
+//logic
+for(int i=0;i<10;i++){
+ //random
+ if(heap1==arr[i][0] && heap2==arr[i][1] && !my_bool)
+ { int x=int(random(1,heap1));
+   if(rand==1){heap1-=x;} else{heap1-=x;heap2-=x;} my_bool=true;}
+ if(heap2==arr[i][0] && heap1==arr[i][1] && !my_bool)
+ {int y=int(random(1,heap2));
+ if(rand==1){heap2-=y;} else{heap1-=y;heap2-=y;} my_bool=true;} 
+ //
+ if(arr[i][0]==heap1 && arr[i][1]<heap2 && !my_bool){heap2=arr[i][1];my_bool=true;}
+ if(arr[i][0]==heap2 && arr[i][1]<heap1 && !my_bool){heap1=arr[i][1];my_bool=true;}
+ if(arr[i][1]==heap1 && arr[i][0]<heap2 && !my_bool){heap2=arr[i][0];my_bool=true;}
+ if(arr[i][1]==heap2 && arr[i][0]<heap1 && !my_bool){heap1=arr[i][0];my_bool=true;}
 //
-	if ( overButton(button2X, button2Y, buttonSize, buttonSize)  ) {
-    boolButton2 = true;
-  } else {
-   boolButton2 = false;   }
-//	
-	if ( overButton(button3X, button3Y, buttonSize, buttonSize)  ) {
-    boolButton3 = true;
-  } else {
-   boolButton3 = false;   }
-} //
-boolean overButton(int x, int y, int width, int height)  {
-  if (mouseX >= x && mouseX <= x+width && 
-      mouseY >= y && mouseY <= y+height) {
-    return true;
- } else {
-  return false;
-  }
-} 
+ if(heap2-heap1==arr[i][1]-arr[i][0] && !my_bool){heap2=arr[i][1]; heap1=arr[i][0];my_bool=true;}
+ if(heap1-heap2==arr[i][1]-arr[i][0] && !my_bool){heap1=arr[i][1]; heap2=arr[i][0];my_bool=true;}
+ 
+  }//for
+ }//button3
+}//draw
 
+void update(){
+ if(overRect(button1X,buttonY,buttonSize)){rect1Over=true;}
+  else{rect1Over=false;}
+ if(overRect(button2X,buttonY,buttonSize)){rect2Over=true;}
+  else{rect2Over=false;}
+ if(overRect(button3X,button3Y,button3Size)){rect3Over=true;}
+  else{rect3Over=false;} 
+}
 
+boolean overRect(int x, int y, int z){
+ if(mouseX>=x && mouseX<=x+z && mouseY>=y && mouseY<=y+z){return true;}
+  else {return false;} 
+}
+
+void mousePressed(){my_bool=false;}
+
+void mouseReleased(){
+if(rect1Over){
+ if(counter2==0 && !bool3rdPress){heap1-=1; counter1++;}
+  else if(counter2!=0 && !bool3rdPress){
+          bool3rdPress=true;
+          heap1-=counter2;
+          counter1=counter2=0;}
+  }//rect1Over
+if(rect2Over){ 
+ if(counter1==0 && !bool3rdPress){heap2-=1; counter2++;}
+ else if(counter1!=0 && !bool3rdPress){
+          bool3rdPress=true;
+          heap2-=counter1;
+          counter1=counter2=0;}
+  }//rect1Over
+if(rect3Over){
+    bool3rdPress=false;
+    counter1=counter2=0;}
+}// mouseReleased
