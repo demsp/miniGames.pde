@@ -1,15 +1,18 @@
 Node root;
+Node t_root;
 
 void setup(){
 size(500,500);
 background(100);
 
 root = new Node(0);
+t_root = root;
  root.display();
  root.add(5);
  root.display();
  root.add(8);
  root.display();
+ t_root.dis();
 }
 
 class Node{
@@ -32,5 +35,9 @@ class Node{
  void display(){
  textSize(40);
  text(value,250,50*lvl);
+ }
+ void dis(){
+ textSize(50);
+ text(value,400,400);
  }
 }
