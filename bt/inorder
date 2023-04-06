@@ -32,7 +32,7 @@ Node temp = null;
  void inorderRec(Node node){
  if(node != null){
   textSize(40);
-  text(value, 50 + x, 400);
+  text(node.value, 50 + x, 400);
   x = x + 50;
   inorderRec(node.temp);
   }
