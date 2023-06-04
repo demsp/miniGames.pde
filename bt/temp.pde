@@ -19,7 +19,7 @@ Node root, temporaryNode;
    Node(int value){
      this.value = value;
      }
-   void add(){addNode(temporaryNode);}  
+   void add(){ addNode(temporaryNode);  }  
    void addNode(Node node){
      node.x = x + 50;
      root = node;
