@@ -4,7 +4,7 @@ Node root, temporaryNode;
      size(400,70);
        root = new Node(5);
        root.display();
-       temporaryNode = new Node();
+       temporaryNode = new Node(3);
        root.add();
        root.display();
        temporaryNode = new Node(7);
