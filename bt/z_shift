@@ -1,0 +1,34 @@
+Node root, root_store;
+   void setup(){
+     background(100);
+     size(400,70);
+       root = new Node(5);
+       root.display(root);
+       root = new Node(3);
+       root.add();
+       root.display(root);
+       root = new Node(7);
+       root.add();
+       root.display(root);     
+     }
+   
+   class Node{
+   int value;
+   int x = 150;
+   Node next;
+   //constructor
+   Node(int value){
+     this.value = value;
+     }
+   void add(){addNode(root);}  
+    void addNode(Node node){     
+     this.next = node;
+     root = this.next;
+          
+   }  
+   void display(Node node){
+     textSize(40);
+     text(node.value, x, 50); 
+     node.x = this.x + 50;    
+    }
+   }
